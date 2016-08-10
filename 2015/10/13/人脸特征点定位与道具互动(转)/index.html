@@ -1,0 +1,667 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Courier New:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="人工智能,人脸识别," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="来源：http://impd.tencent.com/?p=33人脸特征点定位就是通过计算机在人脸图像中自动地定位出人脸各个器官(嘴巴、鼻子、眼睛、眉毛、人脸轮廓等)的准确位置，如图1所示。人脸特征点定位技术有很多的应用，如人脸识别、人脸表情分析、人脸动画、人脸美化等。然而，实际应用中存在各种因素严重影响了人脸特征点的正确定位，这些因素主要有光照变化、姿态变化、表情变化、头发、眼镜、装饰物、遮挡物">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人脸特征点定位与道具互动">
+<meta property="og:url" content="https://39092207.github.io/2015/10/13/人脸特征点定位与道具互动(转)/index.html">
+<meta property="og:site_name" content="景灵">
+<meta property="og:description" content="来源：http://impd.tencent.com/?p=33人脸特征点定位就是通过计算机在人脸图像中自动地定位出人脸各个器官(嘴巴、鼻子、眼睛、眉毛、人脸轮廓等)的准确位置，如图1所示。人脸特征点定位技术有很多的应用，如人脸识别、人脸表情分析、人脸动画、人脸美化等。然而，实际应用中存在各种因素严重影响了人脸特征点的正确定位，这些因素主要有光照变化、姿态变化、表情变化、头发、眼镜、装饰物、遮挡物">
+<meta property="og:image" content="http://impd.tencent.com/wp-content/uploads/2013/04/image001.jpg">
+<meta property="og:image" content="http://impd.tencent.com/wp-content/uploads/2013/04/7bd8dc2c84574728b2a1458986a51085.jpg">
+<meta property="og:image" content="http://impd.tencent.com/wp-content/uploads/2013/04/image003.png">
+<meta property="og:image" content="http://impd.tencent.com/wp-content/uploads/2013/04/image004.jpg">
+<meta property="og:updated_time" content="2016-08-06T11:15:23.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="人脸特征点定位与道具互动">
+<meta name="twitter:description" content="来源：http://impd.tencent.com/?p=33人脸特征点定位就是通过计算机在人脸图像中自动地定位出人脸各个器官(嘴巴、鼻子、眼睛、眉毛、人脸轮廓等)的准确位置，如图1所示。人脸特征点定位技术有很多的应用，如人脸识别、人脸表情分析、人脸动画、人脸美化等。然而，实际应用中存在各种因素严重影响了人脸特征点的正确定位，这些因素主要有光照变化、姿态变化、表情变化、头发、眼镜、装饰物、遮挡物">
+<meta name="twitter:image" content="http://impd.tencent.com/wp-content/uploads/2013/04/image001.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://39092207.github.io/2015/10/13/人脸特征点定位与道具互动(转)/"/>
+
+  <title> 人脸特征点定位与道具互动 | 景灵 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">景灵</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">——我要我想要的</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                人脸特征点定位与道具互动
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-13T16:27:00+00:00" content="Oct 13 2015">
+              Oct 13 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/人工智能/" itemprop="url" rel="index">
+                    <span itemprop="name">人工智能</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="来源：http-impd-tencent-com-p-33"><a href="#来源：http-impd-tencent-com-p-33" class="headerlink" title="来源：http://impd.tencent.com/?p=33"></a>来源：<a href="http://impd.tencent.com/?p=33" target="_blank" rel="external">http://impd.tencent.com/?p=33</a></h2><p>人脸特征点定位就是通过计算机在人脸图像中自动地定位出人脸各个器官(嘴巴、鼻子、眼睛、眉毛、人脸轮廓等)的准确位置，如图1所示。人脸特征点定位技术有很多的应用，如人脸识别、人脸表情分析、人脸动画、人脸美化等。然而，实际应用中存在各种因素严重影响了人脸特征点的正确定位，这些因素主要有光照变化、姿态变化、表情变化、头发、眼镜、装饰物、遮挡物等。因此，人脸特征点定位是一项非常有挑战性的技术。<br><a id="more"></a></p>
+<div style="text-align: center"><img style="text-align: center;" class="size-full wp-image-78 aligncenter" src="http://impd.tencent.com/wp-content/uploads/2013/04/image001.jpg" alt="image001" width="100" height="111"><br><p>图1.&nbsp;人脸特征点</p><br></div><br><!--more--><br>目前，在人脸特征点定位方面，常用的方法是基于主动形状模型 (Active Shape Models, ASM)的方法，它是由Cootes等人于1995年提出的。该模型是基于统计学习的方法，其思想是：首先通过统计一组已给出特征点位置的人脸图像，建立反映人脸图像的全局形状变化规律的统计形状模型以及反映特征点局部区域灰度变化规律的局部纹理模型。在特征点定位过程中，先用这个统计得到的形状模型作为初始的形状模型，然后通过不断地调节以获得最优的形状模型。具体的定位过程如下：<br><br>1)       人脸检测。通过人脸检测算法确定人脸在图像中的大致位置。<br><br>2)       初始化形状模型。利用训练得到的形状模型作为初始模型。<br><br>3)       局部搜索特征点。利用训练得到的局部纹理模型，对每个特征点沿其法线方向在一定范围内进行搜索，以得到最佳的位置。<br><br>4)       重构新形状。通过平移、旋转等重新构建形状。<br><br>5)       迭代。当相邻两次循环得到的形状向量的距离小于某一阈值时，则认为算法收敛，形状最优，迭代结束，否则转到第2步继续迭代。图2是算法的迭代过程，从中可以看出，随着迭代次数的增加，人脸形状模型的精确度越来越高，直至最优模型。<br><div style="text-align: center;"><br><img style="text-align: center;" src="http://impd.tencent.com/wp-content/uploads/2013/04/7bd8dc2c84574728b2a1458986a51085.jpg"><br><p>图2.&nbsp;人脸特征点定位算法的迭代过程</p><br></div>
+
+<p>对于视频，最为简单的方法是对每一帧图像独立进行特征点定位，但这种方法有定位精确度较低，计算时间长等缺点。一种改进的方法是利用视频跟踪技术等，如图3所示，这种改进方法的主要步骤：</p>
+<p>1)       初始化形状模型。首先，如果是处理第一帧，则直接进行人脸检测并用训练得到的形状模型初始化；否则，判断上一帧特征点定位是否成功，如果成功，则直接用上一帧的形状模型初始化当前帧的形状模型，如果失败，就重新检测人脸并用训练得到的形状模型初始化。由于前后帧人脸变动通常比较小，用上一帧的结果初始化，可以获得更好的初始模型，并且只需要更少的迭代就可以获得最优结果。</p>
+<p>2)       特征点跟踪。利用跟踪技术预测当前帧的形状模型，这可以进一步提高定位的精确度和稳定性。</p>
+<p>3)       特征点定位。</p>
+<p>这种方法的优点：</p>
+<p> 精确度更高。利用前一帧的结果初始化，精确度更高；利用跟踪技术进一步提高精确度。<br> 稳定性更强。利用跟踪技术可以获得更加稳定的特征点坐标，帧间之间的特征点坐标更加平滑。<br>  计算时间更短。不需要每帧都进行人脸检测，可以减少很多计算时间；同时，利用前一帧的结果初始化，使得迭代次数更少，进一步减少计算时间。</p>
+<div style="text-align: center;"><br><img src="http://impd.tencent.com/wp-content/uploads/2013/04/image003.png"><br><p>图3.&nbsp;视频中的人脸特征点定位算法的算法流程</p><br></div>
+
+<p>可以将该技术应用于视频聊天中的道具互动，以提高用户的互动性和娱乐程度。道具互动就是在视频聊天过程中，使用该技术定位出人脸的各个特征点，然后根据这些特征点的位置给自己或对方的人脸贴上各种道具如帽子、面具、眼镜、胡须等，以提高用户的互动性和娱乐程度，让用户在视频聊天中停留更长的时间，吸引更多的用户使用视频聊天功能。视频聊天中的道具互动效果如图4所示。</p>
+<div style="text-align: center;"><br><img src="http://impd.tencent.com/wp-content/uploads/2013/04/image004.jpg"><br><p>图4.&nbsp;视频聊天中的道具互动</p><br></div>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/人工智能/" rel="tag">#人工智能</a>
+          
+            <a href="/tags/人脸识别/" rel="tag">#人脸识别</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/12/V8引擎/" rel="next" title="V8引擎">
+                <i class="fa fa-chevron-left"></i> V8引擎
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/13/V8引擎-垃圾回收/" rel="prev" title="V8之旅--垃圾回收">
+                V8之旅--垃圾回收 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="crazyjingling" />
+          <p class="site-author-name" itemprop="name">crazyjingling</p>
+          <p class="site-description motion-element" itemprop="description">crazyjingling's blog | Node.js | javascript</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/crazyjingling" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/mh39092207" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5890829203" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/crazyjingling" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#来源：http-impd-tencent-com-p-33"><span class="nav-number">1.</span> <span class="nav-text">来源：http://impd.tencent.com/?p=33</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crazyjingling</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

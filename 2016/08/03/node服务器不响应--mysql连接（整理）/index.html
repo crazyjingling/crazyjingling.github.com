@@ -1,0 +1,686 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Courier New:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="整理,mysql," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="使用node.js搭建的服务器，发现使用一段时间后就不响应了，找了好久也没发现有啥问题，只能无奈的重启。
+　　某一天看到了在Node.js使用mysql模块时遇到的坑
+ 这篇文章。仔细想想确实也只有在mysql这里出问题了，因为以前一直使用的是mongodb，没遇见过这个问题。
+　　于是，开始在网上找各种关于mysql连接自动释放的文章，结果都是很早以前的文章。
+　　我只能从数据库入手，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="node服务器不响应--mysql连接（整理）">
+<meta property="og:url" content="https://39092207.github.io/2016/08/03/node服务器不响应--mysql连接（整理）/index.html">
+<meta property="og:site_name" content="景灵">
+<meta property="og:description" content="使用node.js搭建的服务器，发现使用一段时间后就不响应了，找了好久也没发现有啥问题，只能无奈的重启。
+　　某一天看到了在Node.js使用mysql模块时遇到的坑
+ 这篇文章。仔细想想确实也只有在mysql这里出问题了，因为以前一直使用的是mongodb，没遇见过这个问题。
+　　于是，开始在网上找各种关于mysql连接自动释放的文章，结果都是很早以前的文章。
+　　我只能从数据库入手，">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006qFjMfjw1f6gk8feo7wj315o0mmjvf.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006qFjMfjw1f6gk6zgsiyj31580nmacq.jpg">
+<meta property="og:updated_time" content="2016-08-06T11:15:23.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="node服务器不响应--mysql连接（整理）">
+<meta name="twitter:description" content="使用node.js搭建的服务器，发现使用一段时间后就不响应了，找了好久也没发现有啥问题，只能无奈的重启。
+　　某一天看到了在Node.js使用mysql模块时遇到的坑
+ 这篇文章。仔细想想确实也只有在mysql这里出问题了，因为以前一直使用的是mongodb，没遇见过这个问题。
+　　于是，开始在网上找各种关于mysql连接自动释放的文章，结果都是很早以前的文章。
+　　我只能从数据库入手，">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/006qFjMfjw1f6gk8feo7wj315o0mmjvf.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://39092207.github.io/2016/08/03/node服务器不响应--mysql连接（整理）/"/>
+
+  <title> node服务器不响应--mysql连接（整理） | 景灵 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">景灵</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">——我要我想要的</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                node服务器不响应--mysql连接（整理）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-03T10:45:00+00:00" content="Aug 3 2016">
+              Aug 3 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index">
+                    <span itemprop="name">mysql</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mysql/整理/" itemprop="url" rel="index">
+                    <span itemprop="name">整理</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　使用node.js搭建的服务器，发现使用一段时间后就不响应了，找了好久也没发现有啥问题，只能无奈的重启。</p>
+<p>　　某一天看到了<a href="https://cnodejs.org/topic/516b77e86d382773064266df" target="_blank" rel="external">在Node.js使用mysql模块时遇到的坑
+ </a>这篇文章。仔细想想确实也只有在mysql这里出问题了，因为以前一直使用的是mongodb，没遇见过这个问题。</p>
+<p>　　于是，开始在网上找各种关于mysql连接自动释放的文章，结果都是很早以前的文章。</p>
+<p>　　我只能从数据库入手，<a id="more"></a>查看数据库的连接数，当前总连接数<strong>22</strong>，而<strong>活跃的只有一个</strong>，坑了个爹的，因为我知道这个活跃的就是我mysql客户端的链接，于是麻溜的关了mysql客户端，果然剩21个链接，没有活跃的了。</p>
+<p>　　这个<strong>21</strong>可谓是意义重大啊，因为当前有两个项目链接该数据库，每个项目的最大链接数是10，剩下一个应该是某个同事的客户端，这说明了什么问题呢，说明了两个项目的连接数均达到了最大，而且一直未释放。</p>
+<p>　　赶紧麻溜重启项目证实一下，我点我点，点了十几下然而服务器依旧运行良好，于是乎，我再想想今天做了些什么操作，服务器不响应了呢，就是这<strong>创建文章</strong>，最主要的是这个创建文章使用链接池的方式跟做查询时是不一样的，就像mysql文档中所写，查询的时候我用了<code>Use pool directly，即poll.query</code>，而创建的时候用了<code>pool.getConnection</code>。</p>
+<p>　　继续麻溜的重启服务器，创建10次文章，第11次哈哈哈哈，就是这货惹的祸（真庆幸当时没有把最大连接数设成100），其实mysql文档里写的也很清楚<code>pool.getConnection</code>拿到的<code>connection</code>在用完后应该用<code>connection.release()</code>释放，让它回到连接池里，以便其他地方使用。</p>
+<p>　　问题就是这么简单，没有仔细看文档！！！<br><img src="http://ww2.sinaimg.cn/large/006qFjMfjw1f6gk8feo7wj315o0mmjvf.jpg" alt=""><br>对比：<br><img src="http://ww2.sinaimg.cn/large/006qFjMfjw1f6gk6zgsiyj31580nmacq.jpg" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/整理/" rel="tag">#整理</a>
+          
+            <a href="/tags/mysql/" rel="tag">#mysql</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/03/fetch简介/" rel="next" title="fetch跨域使用">
+                <i class="fa fa-chevron-left"></i> fetch跨域使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/03/安装python-virtualenv/" rel="prev" title="安装pythod-virtualenv">
+                安装pythod-virtualenv <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="crazyjingling" />
+          <p class="site-author-name" itemprop="name">crazyjingling</p>
+          <p class="site-description motion-element" itemprop="description">crazyjingling's blog | Node.js | javascript</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/crazyjingling" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/mh39092207" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5890829203" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/crazyjingling" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crazyjingling</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

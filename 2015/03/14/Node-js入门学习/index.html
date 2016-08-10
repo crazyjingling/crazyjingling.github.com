@@ -1,0 +1,703 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Courier New:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node.js," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Node.js v0.10.18手册&amp;amp;文档  http://nodeapi.ucdok.com/#/api/Node.js v0.12.0文档 https://nodejs.org/api/Node.js入门经典系列学习  http://www.myexception.cn/javascript/1702369.htmlNode入门  http://www.nodebeginner.org">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Node.js入门学习">
+<meta property="og:url" content="https://39092207.github.io/2015/03/14/Node-js入门学习/index.html">
+<meta property="og:site_name" content="景灵">
+<meta property="og:description" content="Node.js v0.10.18手册&amp;amp;文档  http://nodeapi.ucdok.com/#/api/Node.js v0.12.0文档 https://nodejs.org/api/Node.js入门经典系列学习  http://www.myexception.cn/javascript/1702369.htmlNode入门  http://www.nodebeginner.org">
+<meta property="og:updated_time" content="2016-08-06T11:15:23.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Node.js入门学习">
+<meta name="twitter:description" content="Node.js v0.10.18手册&amp;amp;文档  http://nodeapi.ucdok.com/#/api/Node.js v0.12.0文档 https://nodejs.org/api/Node.js入门经典系列学习  http://www.myexception.cn/javascript/1702369.htmlNode入门  http://www.nodebeginner.org">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://39092207.github.io/2015/03/14/Node-js入门学习/"/>
+
+  <title> Node.js入门学习 | 景灵 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">景灵</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">——我要我想要的</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Node.js入门学习
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-14T15:24:41+00:00" content="Mar 14 2015">
+              Mar 14 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Node.js v0.10.18手册&amp;文档  <a href="http://nodeapi.ucdok.com/#/api/" target="_blank" rel="external">http://nodeapi.ucdok.com/#/api/</a><br>Node.js v0.12.0文档 <a href="https://nodejs.org/api/" target="_blank" rel="external">https://nodejs.org/api/</a><br>Node.js入门经典系列学习  <a href="http://www.myexception.cn/javascript/1702369.html" target="_blank" rel="external">http://www.myexception.cn/javascript/1702369.html</a><br>Node入门  <a href="http://www.nodebeginner.org/index-zh-cn.html#handling-post-requests" target="_blank" rel="external">http://www.nodebeginner.org/index-zh-cn.html#handling-post-requests</a></p>
+<ol>
+<li><p>node.js是首个将异步大规模带到应用层面的平台；但是异步在流程控制中，业务表达并不适合自然语言的线性思维</p>
+</li>
+<li><p>nodejs适合于数据密集型实时的web程序，DIRT</p>
+</li>
+<li><p>node中，I/O几乎总是在主事件轮询之外进行，使得服务器可以一直处于高效并且随时能够做出响应的状态，就想NGINX一样</p>
+</li>
+<li><p>在node 的世界里有两种响应逻辑管理方式：回调和事件监听</p>
+<ul>
+<li>回调：通常用来定义一次性响应逻辑（数据库查询定义回调函数来处理查询结果）</li>
+<li>事件监听器：本质也是一个回调，不同的是它跟一个概念实体（事件）相关联。<a id="more"></a></li>
+</ul>
+</li>
+<li><p>node存储机制：（多用户程序，数据库管理系统靠谱）</p>
+<ul>
+<li>内存存储</li>
+<li>基于文件存储：配置文件等</li>
+<li>关系型数据库存储</li>
+<li>noSql数据库存储</li>
+</ul>
+</li>
+<li><p>require 是Node中少数几个同步I/O操作之一。</p>
+<ul>
+<li>在程序中I/o密集的地方尽量不用require，所有同步调用都会阻塞Node，会出现性能问题，因此，通常都只在程序最初加载时才使用require和其他同步操作</li>
+<li>require返回引用模块中定义的exports对象中的内容</li>
+</ul>
+</li>
+<li><p>socket.io   websocket</p>
+</li>
+<li><p>http: 一个node HTTP服务器实例就是一个事件发射器，一个可以继承、能够添加事件发射及处理能力的类（EventEmitter）</p>
+<ul>
+<li>服务器收到http请求，在触发回调函数之前，node会解析请求的HTTP头，并将他们作为req对象的一部分提供给请求回调，但是node不会在回调函数被出发之前开始对请求体的解析，可以在请求体正在被解析的时候处理其中的数据</li>
+<li>为了提高响应速度，如果可能的话，应该在响应中带着Content-Length域一起发送，对于事项清单而言，响应主体很容易在内存中提前构建好，所以你能得到字符串的长度并一次性的将整个清单发出去，设定Content-Length域会隐含禁用node的块编码，因为要传输的数据更少，所以性能提升</li>
+</ul>
+</li>
+<li><p>cookie及cookieParser<br> 1) cookieParser支持常规cookie、签名cookie、json cookie</p>
+<p> 2) req.cookies默认用常规cookie组装，要想使用session要求的签名cookie需要在创建cookieParser实例的时传入一个加密用的字符串，用来对cookie签名和解签</p>
+<p> 3) req.cookies和req.signedCookies上的对象是随请求发过来的请求头cookie的解析结果</p>
+<p> 4) 常规cookie：常规cookie放在req.cookies中</p>
+<p> 5) 签名cookie：更适合于敏感信息，因为它可以验证cookie数据的完整性，有效的签名cookie放在req.signedCookies中（如果把常规和签名的cookie放在同一个对象中，会更容易受到攻击，因为常规cookie很容易被篡改，仿造签名cookie）</p>
+<pre><code>- 签名的cookie一般使用SHA-1 HMAC算法生成的加密哈希值
+    * name:luna
+    * cookieParser将cookie编码为luna.JJOIJFN798FADJH6765FDSHJ3
+    * 请求过来的从cookie会被解析为req.signedCookies.name:luna
+</code></pre><p> 6) JSON cookie：带有前缀j:的串行化的JSON，可以是签名的，也可以是未签名的。</p>
+<pre><code>- 请求头：‘Cookie : foo=bar, bar =j: {&quot;foo&quot;:&quot;bar&quot;}’ 未签名的JSON Cookie
+- 解析为：{foo : &apos;bar&apos; , bar :{foo:&apos;bar&apos;}}
+- 请求头：‘Cookie : foo=j:{ \&quot;item\&quot;:[1] }.kj8JKHKGIU89565675jhhjg678GHFKJFD} &apos;  签名的JSON Cookie
+- 解析为：{ foo : { item : [1] } }
+</code></pre><p> 7) 设定出站cookie：</p>
+<pre><code>- 通过Set-Cookie设定响应头向http客户端写出站cookie
+    * res.setHeader(&apos;Set-Cookie&apos;,&apos;name=mahui; Expires =Tue,08 Jun 2014 10:18:30 GMT&apos; );
+</code></pre></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/14/API设计指南/" rel="next" title="API设计">
+                <i class="fa fa-chevron-left"></i> API设计
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/14/npm常用命令/" rel="prev" title="npm常用命令">
+                npm常用命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="crazyjingling" />
+          <p class="site-author-name" itemprop="name">crazyjingling</p>
+          <p class="site-description motion-element" itemprop="description">crazyjingling's blog | Node.js | javascript</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/crazyjingling" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/mh39092207" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5890829203" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/crazyjingling" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crazyjingling</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,770 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Courier New:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Node.js,整理,Javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="来源： https://zh.wikipedia.org/wiki/JavaScript%E5%BC%95%E6%93%8E
+主要的网页浏览器JavaScript引擎:
+开发中
+
+Rhino，由Mozilla基金会管理，开放源代码，完全以Java编写。
+SpiderMonkey，第一款JavaScript引擎，早期用于Netscape Navigator，现时用于Mozilla Firefox。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Javascript引擎（整理）">
+<meta property="og:url" content="https://39092207.github.io/2014/08/09/javascript引擎/index.html">
+<meta property="og:site_name" content="景灵">
+<meta property="og:description" content="来源： https://zh.wikipedia.org/wiki/JavaScript%E5%BC%95%E6%93%8E
+主要的网页浏览器JavaScript引擎:
+开发中
+
+Rhino，由Mozilla基金会管理，开放源代码，完全以Java编写。
+SpiderMonkey，第一款JavaScript引擎，早期用于Netscape Navigator，现时用于Mozilla Firefox。">
+<meta property="og:updated_time" content="2016-08-06T11:15:23.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Javascript引擎（整理）">
+<meta name="twitter:description" content="来源： https://zh.wikipedia.org/wiki/JavaScript%E5%BC%95%E6%93%8E
+主要的网页浏览器JavaScript引擎:
+开发中
+
+Rhino，由Mozilla基金会管理，开放源代码，完全以Java编写。
+SpiderMonkey，第一款JavaScript引擎，早期用于Netscape Navigator，现时用于Mozilla Firefox。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://39092207.github.io/2014/08/09/javascript引擎/"/>
+
+  <title> Javascript引擎（整理） | 景灵 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">景灵</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">——我要我想要的</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Javascript引擎（整理）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2014-08-09T22:24:00+00:00" content="Aug 9 2014">
+              Aug 9 2014
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/" itemprop="url" rel="index">
+                    <span itemprop="name">Node.js</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Node-js/JavaScript/整理/" itemprop="url" rel="index">
+                    <span itemprop="name">整理</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>来源： <a href="https://zh.wikipedia.org/wiki/JavaScript%E5%BC%95%E6%93%8E" target="_blank" rel="external">https://zh.wikipedia.org/wiki/JavaScript%E5%BC%95%E6%93%8E</a></p>
+<p><strong>主要的网页浏览器JavaScript引擎:</strong></p>
+<p><strong>开发中</strong></p>
+<ul>
+<li>Rhino，由Mozilla基金会管理，开放源代码，完全以Java编写。</li>
+<li>SpiderMonkey，第一款JavaScript引擎，早期用于Netscape Navigator，现时用于Mozilla Firefox。</li>
+<li>V8，开放源代码，由Google丹麦开发，是Google Chrome的一部分。</li>
+<li>JavaScriptCore，开放源代码，用于Safari。</li>
+<li>Chakra (JScript引擎)，用于Internet Explorer[11]。</li>
+<li>Chakra (JavaScript引擎)，用于Microsoft Edge。</li>
+<li>KJS，KDE的ECMAScript／JavaScript引擎，最初由哈里·波顿开发，用于KDE项目的Konqueror网页浏览器中。</li>
+</ul>
+<p><strong>停止开发</strong></p>
+<ul>
+<li>Linear A，用于Opera 4.0至6.1版本。<a id="more"></a></li>
+<li>Linear B，用于Opera 7.0至9.2版本。</li>
+<li>Futhark，用于Opera 9.5至10.2版本。</li>
+<li>Carakan，用于Opera 10.5至12.1版本。</li>
+<li>Narcissus (JavaScript引擎)，开放源代码，由布兰登·艾克编写（他也编写了SpiderMonkey）。</li>
+<li>Tamarin，由Adobe Labs编写。</li>
+</ul>
+<p><strong>实现</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">应用程序（实现）</th>
+<th style="text-align:left">方言和最后版本</th>
+<th style="text-align:left">ECMAScript版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Google Chrome，V8引擎</td>
+<td style="text-align:left">JavaScript</td>
+<td style="text-align:left">ECMA-262，版本5</td>
+</tr>
+<tr>
+<td style="text-align:left">Mozilla Firefox，Gecko排版引擎，SpiderMonkey和Rhino</td>
+<td style="text-align:left">JavaScript 1.8.5</td>
+<td style="text-align:left">ECMA-262，版本5</td>
+</tr>
+<tr>
+<td style="text-align:left">Safari，Nitro引擎</td>
+<td style="text-align:left">JavaScript</td>
+<td style="text-align:left">ECMA-262，版本5.1</td>
+</tr>
+<tr>
+<td style="text-align:left">Opera</td>
+<td style="text-align:left">一些JavaScript 1.5特性及一些JScript扩展[12]</td>
+<td style="text-align:left">ECMA-262，版本5.1</td>
+</tr>
+<tr>
+<td style="text-align:left">KHTML排版引擎，KDE项目的Konqueror</td>
+<td style="text-align:left">JavaScript 1.5</td>
+<td style="text-align:left">ECMA-262，版本3</td>
+</tr>
+<tr>
+<td style="text-align:left">Adobe Acrobat</td>
+<td style="text-align:left">JavaScript 1.5</td>
+<td style="text-align:left">ECMA-262，版本3</td>
+</tr>
+<tr>
+<td style="text-align:left">OpenLaszlo</td>
+<td style="text-align:left">JavaScript 1.4</td>
+<td style="text-align:left">ECMA-262，版本3</td>
+</tr>
+<tr>
+<td style="text-align:left">Max/MSP</td>
+<td style="text-align:left">JavaScript 1.5</td>
+<td style="text-align:left">ECMA-262，版本3</td>
+</tr>
+<tr>
+<td style="text-align:left">ANT Galio 3</td>
+<td style="text-align:left">JavaScript 1.5附带RMAI扩展</td>
+<td style="text-align:left">ECMA-262，版本3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>More info：</strong> <a href="https://zh.wikipedia.org/wiki/JavaScript%E5%BC%95%E6%93%8E" target="_blank" rel="external">维基百科</a><br><a href="http://baike.baidu.com/link?url=LOxjP7KGm-hPJgx4QjIBu4AC_IOXm5O1nw3wQdspM-_3yXuLFrjGIrX24bzwHVGm0hFWM1aZK0DwpHsS5alchq" target="_blank" rel="external">百度百科</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node-js/" rel="tag">#Node.js</a>
+          
+            <a href="/tags/整理/" rel="tag">#整理</a>
+          
+            <a href="/tags/Javascript/" rel="tag">#Javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/08/09/为什么要用Node-js（转）/" rel="next" title="为什么要用Node.js（转）">
+                <i class="fa fa-chevron-left"></i> 为什么要用Node.js（转）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/09/28/git学习资料/" rel="prev" title="git学习资料（整理）">
+                git学习资料（整理） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="crazyjingling" />
+          <p class="site-author-name" itemprop="name">crazyjingling</p>
+          <p class="site-description motion-element" itemprop="description">crazyjingling's blog | Node.js | javascript</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/crazyjingling" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/mh39092207" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5890829203" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/crazyjingling" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crazyjingling</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

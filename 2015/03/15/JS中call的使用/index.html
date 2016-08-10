@@ -1,0 +1,694 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Courier New:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,call," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="来源：http://ibruce.info/2013/11/22/hexo-your-blog/call 方法应用于：Function 对象调用一个对象的一个方法，以另一个对象替换当前对象。12345678call([thisObj[,arg1[, arg2[,   [,.argN]]]]])参数：    thisObj        可选项。将被用作当前对象的对象。    arg1, arg2,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中call的使用">
+<meta property="og:url" content="https://39092207.github.io/2015/03/15/JS中call的使用/index.html">
+<meta property="og:site_name" content="景灵">
+<meta property="og:description" content="来源：http://ibruce.info/2013/11/22/hexo-your-blog/call 方法应用于：Function 对象调用一个对象的一个方法，以另一个对象替换当前对象。12345678call([thisObj[,arg1[, arg2[,   [,.argN]]]]])参数：    thisObj        可选项。将被用作当前对象的对象。    arg1, arg2,">
+<meta property="og:updated_time" content="2016-08-06T11:15:23.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS中call的使用">
+<meta name="twitter:description" content="来源：http://ibruce.info/2013/11/22/hexo-your-blog/call 方法应用于：Function 对象调用一个对象的一个方法，以另一个对象替换当前对象。12345678call([thisObj[,arg1[, arg2[,   [,.argN]]]]])参数：    thisObj        可选项。将被用作当前对象的对象。    arg1, arg2,">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://39092207.github.io/2015/03/15/JS中call的使用/"/>
+
+  <title> JS中call的使用 | 景灵 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">景灵</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">——我要我想要的</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JS中call的使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-15T12:49:53+00:00" content="Mar 15 2015">
+              Mar 15 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/javascript/" itemprop="url" rel="index">
+                    <span itemprop="name">javascript</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="来源：http-ibruce-info-2013-11-22-hexo-your-blog"><a href="#来源：http-ibruce-info-2013-11-22-hexo-your-blog" class="headerlink" title="来源：http://ibruce.info/2013/11/22/hexo-your-blog/"></a>来源：<a href="http://ibruce.info/2013/11/22/hexo-your-blog/" target="_blank" rel="external">http://ibruce.info/2013/11/22/hexo-your-blog/</a></h2><h3 id="call-方法"><a href="#call-方法" class="headerlink" title="call 方法"></a>call 方法</h3><p>应用于：Function 对象<br>调用一个对象的一个方法，以另一个对象替换当前对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">call([thisObj[,arg1[, arg2[,   [,.argN]]]]])</div><div class="line">参数：</div><div class="line">    thisObj</div><div class="line">        可选项。将被用作当前对象的对象。</div><div class="line">    arg1, arg2, , argN</div><div class="line">        可选项。将被传递方法参数序列。</div><div class="line">说明：</div><div class="line">    call 方法可以用来代替另一个对象调用一个方法。call 方法可将一个函数的对象上下文从初始的上下文改变为由 thisObj 指定的新对象。如果没有提供 thisObj 参数，那么 Global 对象被用作 thisObj。</div></pre></td></tr></table></figure></p>
+<p>1、最基本的理解：</p>
+<p><strong>示例1</strong></p>
+<p>自定义一个类，该类有一个方法showTxt，用来显示当前对象的name值。</p>
+<p>创建一个对象，并且该对象的name值等于test1。</p>
+<p>使用call方法，使新创建的对象obj添加Class1类的showTxt方法，即把Class1类中的this.showTxt中的this指定成obj，这样obj就有了showTxt方法。弹出”test1”。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">function Class1()&#123;</div><div class="line">    this.showTxt = function()&#123;alert(this.name)&#125;</div><div class="line">&#125;</div><div class="line">var obj = new Object();</div><div class="line">obj.name=&quot;test1&quot;</div><div class="line">Class1.call(obj);</div><div class="line">obj.showTxt();//test1</div><div class="line">alert(obj.showTxt);//function()&#123;alert(this.name)&#125;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>这个例子很容易理解。</p>
+<p>2、再看一个稍微深入的理解</p>
+<p><strong>示例2：</strong> 创建Class1的实例，让这个实例调用showTxt方法返回这个实例的name值，因为这个实现没有name值所以返回undefine.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">function Class1()&#123;</div><div class="line">    this.showTxt = function()&#123;alert(this.name)&#125;</div><div class="line">&#125;</div><div class="line">var class1 = new Class1();</div><div class="line">class1.showTxt();//undefined</div><div class="line">alert(class1.showTxt);//function()&#123;alert(this.name)&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>示例3：</strong> 下面就给Class1添加个name值，这时class1再调用showTxt方法，会返回class1，这是因为给类添加了name值，所以实例的name也由undefine变成了class1.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">function Class1()&#123;</div><div class="line">    this.name = &apos;class1&apos;;//添加name值</div><div class="line">    this.showTxt = function()&#123;alert(this.name)&#125;</div><div class="line">&#125;</div><div class="line">var class1 = new Class1();</div><div class="line">class1.showTxt();//class1</div><div class="line">alert(class1.showTxt);//function()&#123;alert(this.name)&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>示例4：</strong> Class1.call(obj) 这个操作把Class1中的this.name,this.showTxt里的this替换成了obj，所以就变成了obj.name=’class1’，所以obj.showTxt在执行时返回class1。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">function Class1()&#123;</div><div class="line">    this.name = &apos;class1&apos;;//添加name值</div><div class="line">    this.showTxt = function()&#123;alert(this.name)&#125;</div><div class="line">&#125;</div><div class="line">function Class2()&#123;</div><div class="line">    this.name = &apos;class2&apos;;</div><div class="line">&#125;</div><div class="line">var class2 = new Class2();</div><div class="line">Class1.call(class2);</div><div class="line">alert(class2.showTxt);//function()&#123;alert(this.name)&#125;</div><div class="line">class2.showTxt();//class1</div></pre></td></tr></table></figure></p>
+<p><strong>示例5：</strong> 如果在Class1.call(obj);之后再添加obj.name = ‘test1’,最后结果会输入test1，原因显而易见。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Class1</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'class1'</span>;<span class="comment">//添加name值</span></div><div class="line">    <span class="keyword">this</span>.showTxt = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="keyword">this</span>.name)&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Class2</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'class2'</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> class2 = <span class="keyword">new</span> Class2();</div><div class="line">Class1.call(class2);</div><div class="line">class2.name = <span class="string">'test1'</span>;<span class="comment">//重定义obj.name值</span></div><div class="line">alert(class2.showTxt);<span class="comment">//function()&#123;alert(this.name)&#125;</span></div><div class="line">class2.showTxt();<span class="comment">//test1</span></div></pre></td></tr></table></figure></p>
+<p>上面的例子call的都是一个对象的实例，接下来的案例把对象的实例直接换成函数，看看执行结果会发生哪些变化</p>
+<p>3、把call方法的第一参数由实例换成函数看看会怎么</p>
+<p><strong>示例6：</strong> Class2是一个function对象的引用,在执行Class1.call(Class2)时this.showTxt里的this被替换成了Class2。这样Class2就有了showTxt方法，Class2.showTxt()执行时会返回Class2.name的值，因为Class2并未定义name值，所以会返回undefined。</p>
+<p>Class2函数里的this.name是由Class2创建实例的name值，并不是Class2.name，这两个值有时会让我迷糊。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Class1</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.showTxt = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="keyword">this</span>.name)&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Class2</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'class2'</span>;</div><div class="line">&#125;</div><div class="line">Class1.call(Class2);</div><div class="line">alert(Class2.showTxt);<span class="comment">//function()&#123;alert(this.name)&#125;</span></div><div class="line">Class2.showTxt();<span class="comment">//undefined</span></div></pre></td></tr></table></figure></p>
+<p>4、接着看下面的例子</p>
+<p><strong>示例7：</strong> class1.showTxt.call(class2);之所以会返回class2是因为function(){alert(this.name)}这里的this被call指定成了class2，变成了alert(class2.name)，所以会返回class2.</p>
+<p>alert(class2.showTxt)返回undefined，说明并未定义class2.showTxt方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Class1</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.showTxt = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="keyword">this</span>.name)&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Class2</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'class2'</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> class1 = <span class="keyword">new</span> Class1();</div><div class="line"><span class="keyword">var</span> class2 = <span class="keyword">new</span> Class2();</div><div class="line">class1.showTxt.call(class2);<span class="comment">//class2</span></div><div class="line">alert(class2.showTxt);<span class="comment">//undefined</span></div></pre></td></tr></table></figure></p>
+<p>因为并为给class2添加showTxt方法，所以提示该错误。如果在这个调用之前添加Class1.call(class2);这个调用就OK了<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Class1.call(class2);</div><div class="line">class2.showTxt();<span class="comment">//class1</span></div></pre></td></tr></table></figure></p>
+<p><strong>示例8：</strong> 这个例子都会返回undefined<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Class1</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.showTxt = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;alert(<span class="keyword">this</span>.name)&#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Class2</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = <span class="string">'class2'</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> class1 = <span class="keyword">new</span> Class1();</div><div class="line">class1.showTxt.call(Class2);<span class="comment">//undefined</span></div><div class="line">alert(Class2.showTxt);<span class="comment">//undefined</span></div></pre></td></tr></table></figure></p>
+<p>5、在使用call时如果调用函数里没有this会怎么样</p>
+<p><strong>示例9：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line">    alert(a+b);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sub</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line">    alert(a-b);</div><div class="line">&#125;</div><div class="line">add.call(sub,<span class="number">3</span>,<span class="number">1</span>);<span class="comment">//4</span></div></pre></td></tr></table></figure></p>
+<p>结果返回4，add.call(sub,3,1)在执行过程中，sub做为add函数中this的替代品出现，但是因为add里没有用到this，所以sub函数直接忽略，所以结果是4。</p>
+<p>所以实际执行如下：返回4。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a,b</span>)</span>&#123;</div><div class="line">    alert(a+b);</div><div class="line">&#125;</div><div class="line">add(<span class="number">3</span>,<span class="number">1</span>);<span class="comment">//4</span></div></pre></td></tr></table></figure></p>
+<p>6、不错，接下来再理解一个怪异的形式</p>
+<p><strong>示例10：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="number">2</span>)</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> f3 = f1.call;</div><div class="line">f1.call(f2);<span class="comment">//1</span></div><div class="line">f3.call(f2);<span class="comment">//2</span></div><div class="line">f1.call(f2);比较好理解，如果不理解看上边的<span class="keyword">case</span>，但如何理解f3.call(f2)会返回<span class="number">2</span>呢，为了方便理解进行一下等效变化为f1.call.call(f2)，这时会发现实际上是f1.call方法call调用了f2，那f1怎么又会有call方法呢？call, apply都属于<span class="built_in">Function</span>.prototype的一个方法,它是JavaScript引擎内在实现的,因为属于<span class="built_in">Function</span>.prototype,所以每个<span class="built_in">Function</span>对象实例,也就是每个方法都有call, apply属性。</div></pre></td></tr></table></figure></p>
+<p>在理解f1.call.call(f2)时我们首先要知道call方法到底是如何执行的，这样才能f1.call.call(f2)如何执行。</p>
+<p><strong>示例11：</strong></p>
+<p>引用JK写的一个用apply实现call的方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsCall</span>(<span class="params">oThis</span>)</span>&#123;<span class="comment">//这里的jsCall就是Call</span></div><div class="line">    <span class="keyword">var</span> argsNew = [];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>;i&lt;<span class="built_in">arguments</span>.length;i++)&#123;</div><div class="line">        argsNew.push(<span class="built_in">arguments</span>[i]);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.apply(oThis,argsNew);</div><div class="line">&#125;</div><div class="line"><span class="built_in">Function</span>.prototype.jsCall = jsCall;</div><div class="line">或简写成</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsCall</span>(<span class="params">oThis</span>)</span>&#123;<span class="comment">//这里的jsCall就是Call</span></div><div class="line">    <span class="keyword">var</span> argsNew = [].slice.call(<span class="built_in">arguments</span>,<span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.apply(oThis,argsNew);</div><div class="line">&#125;</div><div class="line"><span class="built_in">Function</span>.prototype.jsCall = jsCall;</div></pre></td></tr></table></figure></p>
+<p>这样就得到了一个和call一样功能的jsCall.</p>
+<p>接下来构建两个函数f1,f2<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    alert([<span class="keyword">this</span>,a,<span class="string">'f1'</span>]);</div><div class="line">&#125;</div><div class="line">f1(<span class="number">11</span>);<span class="comment">//[object Window],11,f1</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    alert([<span class="keyword">this</span>,a,<span class="string">'f2'</span>]);</div><div class="line">&#125;</div><div class="line">f2(<span class="number">22</span>);<span class="comment">//[object Window],11,f2</span></div></pre></td></tr></table></figure></p>
+<p>用jsCall把f1中的this替换成f2<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    alert([<span class="keyword">this</span>,a,<span class="string">'f1'</span>]);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    alert([<span class="keyword">this</span>,a,<span class="string">'f2'</span>]);</div><div class="line">&#125;</div><div class="line">f1.jsCall(f2,<span class="number">11</span>);<span class="comment">//function f2(a)&#123;alert([this, a, "f2"]);&#125;,11,f1</span></div></pre></td></tr></table></figure></p>
+<p>执行结果发现[object Window]被替换成f2函数<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsCall</span>(<span class="params">oThis</span>)</span>&#123;<span class="comment">//这里的jsCall就是Call</span></div><div class="line">    <span class="keyword">var</span> argsNew = [].slice.call(<span class="built_in">arguments</span>,<span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.apply(oThis,argsNew);</div><div class="line">&#125;</div><div class="line"><span class="built_in">Function</span>.prototype.jsCall = jsCall;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    alert([<span class="keyword">this</span>,a,<span class="string">'f1'</span>]);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    alert([<span class="keyword">this</span>,a,<span class="string">'f2'</span>]);</div><div class="line">&#125;</div><div class="line">f1.jsCall.jsCall(f2,<span class="number">11</span>);<span class="comment">//11,,f2</span></div></pre></td></tr></table></figure></p>
+<p>在执行f1.jsCall.jsCall(f2,11);时返回11,,f2，为什么会返回这个结果，重点来了:)</p>
+<p>f1.jsCall方法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">alert(f1.jsCall);</div><div class="line"><span class="comment">//返回</span></div><div class="line"><span class="comment">//function jsCall(oThis) &#123;</span></div><div class="line"><span class="comment">//    var argsNew = [].slice.call(arguments, 1);</span></div><div class="line"><span class="comment">//    return this.apply(oThis, argsNew);</span></div><div class="line"><span class="comment">//&#125;</span></div></pre></td></tr></table></figure></p>
+<p>所以f1.jsCall.jsCall可以替换成jsCall.jsCall看一下执行结果<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsCall</span>(<span class="params">oThis</span>)</span>&#123;<span class="comment">//这里的jsCall就是Call</span></div><div class="line">    <span class="keyword">var</span> argsNew = [].slice.call(<span class="built_in">arguments</span>,<span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.apply(oThis,argsNew);</div><div class="line">&#125;</div><div class="line"><span class="built_in">Function</span>.prototype.jsCall = jsCall;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    alert([<span class="keyword">this</span>,a,<span class="string">'f1'</span>]);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    alert([<span class="keyword">this</span>,a,<span class="string">'f2'</span>]);</div><div class="line">&#125;</div><div class="line">jsCall.jsCall(f2,<span class="number">11</span>);<span class="comment">//11,,f2</span></div></pre></td></tr></table></figure></p>
+<p>接着分析</p>
+<p>jsCall在执行的过程中，return this.apply(oThis,argsNew);里的this被替换成了f2，11做为参数传给了(oThis,argsNew)，变成了f2.apply(11);<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">jsCall</span>(<span class="params">oThis</span>)</span>&#123;<span class="comment">//这里的jsCall就是Call</span></div><div class="line">    <span class="keyword">var</span> argsNew = [].slice.call(<span class="built_in">arguments</span>,<span class="number">1</span>)</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.apply(oThis,argsNew);</div><div class="line">&#125;</div><div class="line"><span class="built_in">Function</span>.prototype.jsCall = jsCall;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    alert([<span class="keyword">this</span>,a,<span class="string">'f1'</span>]);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params">a</span>)</span>&#123;</div><div class="line">    alert([<span class="keyword">this</span>,a,<span class="string">'f2'</span>]);</div><div class="line">&#125;</div><div class="line">f2.apply(<span class="number">11</span>);<span class="comment">//11,,f2</span></div></pre></td></tr></table></figure></p>
+<p>返回结果跟f1.jsCall.jsCall(f2,11)一样。</p>
+<p>回过头来看<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="number">1</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="number">2</span>)</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> f3 = f1.call;</div><div class="line">f1.call(f2);<span class="comment">//1</span></div><div class="line">f3.call(f2);<span class="comment">//2</span></div></pre></td></tr></table></figure></p>
+<p>这样就不难理解f1.call.call(f2)实现时，f1.call执行过程中call中的this被f2替换成了f2.call();因为f2里没有this的引用所以执行结果是2.<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">f2.call()<span class="comment">//2</span></div></pre></td></tr></table></figure></p>
+<p>需要十分注意的是f1.call是方法，f1是函数对象，这两者在call时是有区别的。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+            <a href="/tags/call/" rel="tag">#call</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/15/Lo-Dash和Underscore-js/" rel="next" title="Lo-Dash和Underscore.js">
+                <i class="fa fa-chevron-left"></i> Lo-Dash和Underscore.js
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/15/javascript框架/" rel="prev" title="javascript框架">
+                javascript框架 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="crazyjingling" />
+          <p class="site-author-name" itemprop="name">crazyjingling</p>
+          <p class="site-description motion-element" itemprop="description">crazyjingling's blog | Node.js | javascript</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/crazyjingling" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/mh39092207" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5890829203" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/crazyjingling" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#来源：http-ibruce-info-2013-11-22-hexo-your-blog"><span class="nav-number">1.</span> <span class="nav-text">来源：http://ibruce.info/2013/11/22/hexo-your-blog/</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#call-方法"><span class="nav-number">1.1.</span> <span class="nav-text">call 方法</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crazyjingling</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

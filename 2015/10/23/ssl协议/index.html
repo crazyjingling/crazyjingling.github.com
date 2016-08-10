@@ -1,0 +1,652 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Courier New:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="crazyjingling" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="SSL(Secure Sockets Layer) 安全套接层,及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。
+解析　　Secure Socket Layer，为Netscape所研发，用以保障在Internet上数据传输之安全，利用数据加密(Encryption)技术，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ssl协议">
+<meta property="og:url" content="https://39092207.github.io/2015/10/23/ssl协议/index.html">
+<meta property="og:site_name" content="景灵">
+<meta property="og:description" content="SSL(Secure Sockets Layer) 安全套接层,及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。
+解析　　Secure Socket Layer，为Netscape所研发，用以保障在Internet上数据传输之安全，利用数据加密(Encryption)技术，">
+<meta property="og:updated_time" content="2016-08-06T11:15:23.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ssl协议">
+<meta name="twitter:description" content="SSL(Secure Sockets Layer) 安全套接层,及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。
+解析　　Secure Socket Layer，为Netscape所研发，用以保障在Internet上数据传输之安全，利用数据加密(Encryption)技术，">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://39092207.github.io/2015/10/23/ssl协议/"/>
+
+  <title> ssl协议 | 景灵 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">景灵</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">——我要我想要的</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ssl协议
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-23T15:16:30+00:00" content="Oct 23 2015">
+              Oct 23 2015
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>　　<a href="http://baike.baidu.com/link?url=HiidUehsgLs9UcUCbSL6PCqpnHeLA0KG-niuZsVJkGeYEwcgfqi-SpilkJ0wzdk5Vz1-GCPY3qle659FrKBpma" target="_blank" rel="external">SSL(Secure Sockets Layer)</a> 安全套接层,及其继任者传输层安全（Transport Layer Security，TLS）是为网络通信提供安全及数据完整性的一种安全协议。TLS与SSL在传输层对网络连接进行加密。</p>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>　　Secure Socket Layer，为Netscape所研发，用以保障在Internet上数据传输之安全，利用数据加密(Encryption)技术，可确保数据在网络上之传输过程中不会被截取及窃听。一般通用之规格为40 bit之安全标准，美国则已推出128 bit之更高安全标准，但限制出境。只要3.0版本以上之I.E.或Netscape浏览器即可支持SSL。<br>当前版本为3.0。<strong>它已被广泛地用于Web浏览器与服务器之间的身份认证和加密数据传输</strong>。<br>　　SSL协议位于TCP/IP协议与各种应用层协议之间，为数据通讯提供安全支持。SSL协议可分为两层： SSL记录协议（SSL Record Protocol）：它建立在可靠的传输协议（如TCP）之上，为高层协议提供数据封装、压缩、加密等基本功能的支持。 SSL握手协议（SSL Handshake Protocol）：它建立在SSL记录协议之上，用于在实际的数据传输开始前，通讯双方进行身份认证、协商加密算法、交换加密密钥等。</p>
+<h3 id="提供服务"><a href="#提供服务" class="headerlink" title="提供服务"></a>提供服务</h3><p>1）认证用户和服务器，确保数据发送到正确的客户机和服务器；<br><a id="more"></a><br>2）加密数据以防止数据中途被窃取；</p>
+<p>3）维护数据的完整性，确保数据在传输过程中不被改变。</p>
+<h3 id="服务器类型"><a href="#服务器类型" class="headerlink" title="服务器类型"></a>服务器类型</h3><ol>
+<li>Tomcat 5.x</li>
+<li>Nginx</li>
+<li>IIS</li>
+<li>Apache 2.x</li>
+<li>IBM HTTP SERVER 6.0[1] </li>
+</ol>
+<h3 id="工作流程"><a href="#工作流程" class="headerlink" title="工作流程"></a>工作流程</h3><p>服务器认证阶段：1）客户端向服务器发送一个开始信息“Hello”以便开始一个新的会话连接；2）服务器根据客户的信息确定是否需要生成新的主密钥，如需要则服务器在响应客户的“Hello”信息时将包含生成主密钥所需的信息；3）客户根据收到的服务器响应信息，产生一个主密钥，并用服务器的公开密钥加密后传给服务器；4）服务器回复该主密钥，并返回给客户一个用主密钥认证的信息，以此让客户认证服务器。<br>用户认证阶段：在此之前，服务器已经通过了客户认证，这一阶段主要完成对客户的认证。经认证的服务器发送一个提问给客户，客户则返回（数字）签名后的提问和其公开密钥，从而向服务器提供认证。<br>SSL协议提供的安全通道有以下三个特性：<br>机密性：SSL协议使用密钥加密通信数据。<br>可靠性：服务器和客户都会被认证，客户的认证是可选的。<br>完整性：SSL协议会对传送的数据进行完整性检查。<br>从SSL 协议所提供的服务及其工作流程可以看出，SSL协议运行的基础是商家对消费者信息保密的承诺，这就有利于商家而不利于消费者。在电子商务初级阶段，由于运作电子商务的企业大多是信誉较高的大公司，因此这问题还没有充分暴露出来。但随着电子商务的发展，各中小型公司也参与进来，这样在电子支付过程中的单一认证问题就越来越突出。虽然在SSL3.0中通过数字签名和数字证书可实现浏览器和Web服务器双方的身份验证，但是SSL协议仍存在一些问题，比如，只能提供交易中客户与服务器间的双方认证，在涉及多方的电子交易中，SSL协议并不能协调各方间的安全传输和信任关系。在这种情况下，Visa和 MasterCard两大信用卡公组织制定了SET协议，为网上信用卡支付提供了全球性的标准。</p>
+<h3 id="SSL的体系结构"><a href="#SSL的体系结构" class="headerlink" title="SSL的体系结构"></a>SSL的体系结构</h3><p>SSL的体系结构中包含两个协议子层，其中底层是SSL纪录协议层（SSL Record Protocol Layer）；高层是SSL握手协议层（SSL HandShake Protocol Layer）。SSL的协议栈如图所示，其中阴影部分即SSL协议。[2] </p>
+<p>SSL纪录协议层的作用是为高层协议提供基本的安全服务。SSL纪录协议针对HTTP协议进行了特别的设计，使得超文本的传输协议HTTP能够在SSL运行。纪录封装各种高层协议，具体实施压缩解压缩、加密解密、计算和校验MAC等与安全有关的操作。<br>SSL握手协议层包括SSL握手协议（SSL HandShake Protocol）、SSL密码参数修改协议（SSL Change Cipher Spec Protocol）、应用数据协议（Application Data Protocol）和SSL告警协议（SSL Alert Protocol）。握手层的这些协议用于SSL管理信息的交换，允许应用协议传送数据之间相互验证，协商加密算法和生成密钥等。SSL握手协议的作用是协调客户和服务器的状态，使双方能够达到状态的同步。</p>
+<h3 id="SSL纪录协议"><a href="#SSL纪录协议" class="headerlink" title="SSL纪录协议"></a>SSL纪录协议</h3><p>SSL纪录协议（Record Protocol）为SSL连提供两种服务。[2]<br>（1）保密性：利用握手协议所定义的共享密钥对SSL净荷（Payload）加密。<br>（2）完整性：利用握手协议所定义的共享的MAC密钥来生成报文的鉴别码（MAC）。<br>SSL的工作过程如下。<br>（1）发送方的工作过程为：<br>从上次接受要发送的数据（包括各种消息和数据）；<br>对信息进行分段，分成若干纪录；<br>使用指定的压缩算法进行数据压缩（可选）；<br>使用指定的MAC算法生成MAC；<br>使用指定的加密算法进行数据加密；<br>添加SSL纪录协议的头，发送数据。<br>（2）接收方的工作过程为：<br>接收数据，从SSL纪录协议的头中获取相关信息；<br>使用指定的解密算法解密数据；<br>使用指定的MAC算法校验MAC；<br>使用压缩算法对数据解压缩（在需要进行）；<br>将纪录进行数据重组；<br>将数据发送给高层。<br>SSL纪录协议处理的最后一个步骤是附加一个SSL纪录协议的头，以便构成一个SSL纪录。SSL纪录协议头中包含了SSL纪录协议的若干控制信息。</p>
+<h3 id="SSL的会话状态"><a href="#SSL的会话状态" class="headerlink" title="SSL的会话状态"></a>SSL的会话状态</h3><p>会话（Session）和连接（Connection）是SSL中两个重要的概念，在规范中定义如下。[3]<br>（1）SSL连接：用于提供某种类型的服务数据的传输，是一种点对点的关系。一般来说，连接的维持时间比较短暂，并且每个连接一定与某一个会话相关联。<br>（2）SSL会话：是指客户和服务器之间的一个关联关系。会话通过握手协议来创建。它定义了一组安全参数。<br>一次会话过程通常会发起多个SSL连接来完成任务，例如一次网站的访问可能需要多个HTTP/SSL/TCP连接来下载其中的多个页面，这些连接共享会话定义的安全参数。这种共享方式可以避免为每个SSL连接单独进行安全参数的协商，而只需在会话建立时进行一次协商，提高了效率。<br>每一个会话（或连接）都存在一组与之想对应的状态，会话（或连接）的状态表现为一组与其相关的参数集合，最主要的内容是与会话（或连接）相关的安全参数的集合，用会话（或连接）中的加密解密、认证等安全功能的实现。在SSL通信过程中，通信算法的状态通过SSL握手协议实现同步。<br>根据SSL协议的约定，会话状态由以下参数来定义：<br>（1）会话标识符：是由服务器选择的任意字节序列，用于标识活动的会话或可恢复的会话状态。<br>（2）对方的证书：会话对方的X.509v3证书。该参数可为空。<br>（3）压缩算法：在加密之前用来压缩数据的算法。<br>（4）加密规约（Cipher Spec）：用于说明对大块数据进行加密采用的算法，以及计算MAC所采用的散列算法。<br>（5）主密值：一个48字节长的秘密值，由客户和服务器共享。<br>（6）可重新开始的标识：用于指示会话是否可以用于初始化新的连接。<br>连接状态可以一下参数来定义：<br>（1）服务器和客户器的随机数：是服务器和客户为每个连接选择的用于标识连接的字节序列。<br>（2）服务器写MAC密值：服务器发送数据时，生成MAC<br>（3）使用的密钥，长度为128 bit。<br>（4）客户写MAC密值，服务器发送数据时，用于数据加密的密钥，长度为128 bit 。<br>（5）客户写密钥：客户发送数据时，用于数据加密的密钥，长度为128 bit。<br>（6）初始化向量：当使用CBC模式的分组密文算法是=时，需要为每个密钥维护初始化向量。<br>（7）序列号：通信的每一端都为每个连接中的发送和接收报文维持着一个序列号。</p>
+<h3 id="https介绍"><a href="#https介绍" class="headerlink" title="https介绍"></a>https介绍</h3><p>HTTPS（Hypertext Transfer Protocol Secure）安全超文本传输协议<br>它是由Netscape开发并内置于其浏览器中，用于对数据进行压缩和解压操作，并返回网络上传送回的结果。HTTPS实际上应用了Netscape的完全套接字层（SSL）作为HTTP应用层的子层。（HTTPS使用端口443，而不是象HTTP那样使用端口80来和TCP/IP进行通信。）SSL使用40 位关键字作为RC4流加密算法，这对于商业信息的加密是合适的。HTTPS和SSL支持使用X.509数字认证，如果需要的话用户可以确认发送者是谁。。<br>https是以安全为目标的HTTP通道，简单讲是HTTP的安全版。即HTTP下加入SSL层，https的安全基础是SSL，因此加密的详细内容请看SSL。<br>它是一个URI scheme(抽象标识符体系)，句法类同http:体系。用于安全的HTTP数据传输。https:URL表明它使用了HTTP，但HTTPS存在不同于HTTP的默认端口及一个加密/身份验证层（在HTTP与TCP之间）。这个系统的最初研发由网景公司进行，提供了身份验证与加密通讯方法，它被广泛用于万维网上安全敏感的通讯，例如交易支付方面。<br>限制<br>它的安全保护依赖浏览器的正确实现以及服务器软件、实际加密算法的支持.<br>一种常见的误解是“银行用户在线使用https:就能充分彻底保障他们的银行卡号不被偷窃。”实际上，与服务器的加密连接中能保护银行卡号的部分，只有用户到服务器之间的连接及服务器自身。并不能绝对确保服务器自己是安全的，这点甚至已被攻击者利用，常见例子是模仿银行域名的钓鱼攻击。少数罕见攻击在网站传输客户数据时发生，攻击者尝试窃听数据于传输中。<br>商业网站被人们期望迅速尽早引入新的特殊处理程序到金融网关，仅保留传输码(transaction number)。不过他们常常存储银行卡号在同一个数据库里。那些数据库和服务器少数情况有可能被未授权用户攻击和损害。[4] </p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>extended validation ssl certificates翻译为中文即扩展验证（EV）SSL证书，该证书经过最彻底的身份验证，确保证书持有组织的真实性。独有的绿色地址栏技术将循环显示组织名称和作为CA的GlobalSign名称，从而最大限度上确保网站的安全性，树立网站可信形象，不给欺诈钓鱼网站以可乘之机。<br>对线上购物者来说，绿色地址栏是验证网站身份及安全性的最简便可靠的方式。在IE7.0、FireFox3.0、Opera 9.5等新一代高安全浏览器下，使用扩展验证（EV）SSL证书的网站的浏览器地址栏会自动呈现绿色，从而清晰地告诉用户正在访问的网站是经过严格认证的。此外绿色地址栏临近的区域还会显示网站所有者的名称和颁发证书CA机构名称，这些均向客户传递同一信息，该网站身份可信，信息传递安全可靠，而非钓鱼网站。</p>
+<h3 id="SSL证书"><a href="#SSL证书" class="headerlink" title="SSL证书"></a><a href="http://baike.baidu.com/view/1009264.htm" target="_blank" rel="external">SSL证书</a></h3><p>依据功能和品牌不同分类有所不同，但SSL证书作为国际通用的产品，最为重要的便是产品兼容性（即证书根预埋技术），因为他解决了网民登录网站的信任问题，网民可以通过SSL证书轻松识别网站的真实身份。SSL证书分为如下种类：</p>
+<ul>
+<li>扩展验证型(EV)SSL证书</li>
+<li>组织验证型(OV)SSL证书</li>
+<li>域名验证型（DV）SSL证书</li>
+</ul>
+<h3 id="申请SSL证书"><a href="#申请SSL证书" class="headerlink" title="申请SSL证书"></a>申请SSL证书</h3><p>主要需要经过以下3个步骤：</p>
+<p>1、制作CSR文件。<br>SSL证书<br>SSL证书<br>CSR就是Certificate Secure Request证书请求文件。这个文件是由申请人制作，在制作的同时，系统会产生2个密钥，一个是公钥就是这个CSR文件，另外一个是私钥，存放在服务器上。要制作CSR文件，申请人可以参考WEB SERVER的文档，一般APACHE等，使用OPENSSL命令行来生成KEY+CSR2个文件，Tomcat，JBoss，Resin等使用KEYTOOL来生成JKS和CSR文件，IIS通过向导建立一个挂起的请求和一个CSR文件。<br>2、CA认证。<br>将CSR提交给CA，CA一般有2种认证方式：1、域名认证，一般通过对管理员邮箱认证的方式，这种方式认证速度快，但是签发的证书中没有企业的名称；2、企业文档认证，需要提供企业的营业执照。一般需要3-5个工作日。 也有需要同时认证以上2种方式的证书，叫EV证书，这种证书可以使IE7以上的浏览器地址栏变成绿色，所以认证也最严格。<br>3、证书的安装。<br>在收到CA的证书后，可以将证书部署上服务器，一般APACHE文件直接将KEY+CER复制到文件上，然后修改HTTPD.CONF文件；TOMCAT等，需要将CA签发的证书CER文件导入JKS文件后，复制上服务器，然后修改SERVER.XML；IIS需要处理挂起的请求，将CER文件导入。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/21/Untitled/" rel="next" title="图片之渐进/交错">
+                <i class="fa fa-chevron-left"></i> 图片之渐进/交错
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/26/原色/" rel="prev" title="RGB与CMY">
+                RGB与CMY <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="crazyjingling" />
+          <p class="site-author-name" itemprop="name">crazyjingling</p>
+          <p class="site-description motion-element" itemprop="description">crazyjingling's blog | Node.js | javascript</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/crazyjingling" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/mh39092207" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5890829203" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/crazyjingling" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.</span> <span class="nav-text">解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提供服务"><span class="nav-number">2.</span> <span class="nav-text">提供服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器类型"><span class="nav-number">3.</span> <span class="nav-text">服务器类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作流程"><span class="nav-number">4.</span> <span class="nav-text">工作流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL的体系结构"><span class="nav-number">5.</span> <span class="nav-text">SSL的体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL纪录协议"><span class="nav-number">6.</span> <span class="nav-text">SSL纪录协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL的会话状态"><span class="nav-number">7.</span> <span class="nav-text">SSL的会话状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#https介绍"><span class="nav-number">8.</span> <span class="nav-text">https介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">9.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSL证书"><span class="nav-number">10.</span> <span class="nav-text">SSL证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#申请SSL证书"><span class="nav-number">11.</span> <span class="nav-text">申请SSL证书</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crazyjingling</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

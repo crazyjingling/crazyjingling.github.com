@@ -1,0 +1,672 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Courier New:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="crazyjingling" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="一、简介  
+　　JPEG、GIF和PNG这三种图像格式都提供了一种功能，让图像能够更快地显示。图像可以以一种特殊方式存储，显示时先大概显示图像的草图，当文件全部下载后再填充细节（百度图片，QQ空间，点点网等显示大图时都使用的这种方式）。这起到一种很有意义的心理效果，因为这样使人们有东西可看，而不必坐着干等大型图像慢慢显示在屏幕上。但这种效果并不是所有浏览器都支持。以这种方式保存的文件叫交错gif">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图片之渐进/交错">
+<meta property="og:url" content="https://39092207.github.io/2015/10/21/Untitled/index.html">
+<meta property="og:site_name" content="景灵">
+<meta property="og:description" content="一、简介  
+　　JPEG、GIF和PNG这三种图像格式都提供了一种功能，让图像能够更快地显示。图像可以以一种特殊方式存储，显示时先大概显示图像的草图，当文件全部下载后再填充细节（百度图片，QQ空间，点点网等显示大图时都使用的这种方式）。这起到一种很有意义的心理效果，因为这样使人们有东西可看，而不必坐着干等大型图像慢慢显示在屏幕上。但这种效果并不是所有浏览器都支持。以这种方式保存的文件叫交错gif">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/6e6fea89gw1exejmm7vtng208m06wdgv.gif">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6e6fea89gw1exejnc3lxbg208m06w76u.gif">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6e6fea89gw1exejphrx0bj20dw06dt9f.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/6e6fea89gw1exejpzb49dj208h03b0sq.jpg">
+<meta property="og:updated_time" content="2016-08-06T11:15:23.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="图片之渐进/交错">
+<meta name="twitter:description" content="一、简介  
+　　JPEG、GIF和PNG这三种图像格式都提供了一种功能，让图像能够更快地显示。图像可以以一种特殊方式存储，显示时先大概显示图像的草图，当文件全部下载后再填充细节（百度图片，QQ空间，点点网等显示大图时都使用的这种方式）。这起到一种很有意义的心理效果，因为这样使人们有东西可看，而不必坐着干等大型图像慢慢显示在屏幕上。但这种效果并不是所有浏览器都支持。以这种方式保存的文件叫交错gif">
+<meta name="twitter:image" content="http://ww3.sinaimg.cn/large/6e6fea89gw1exejmm7vtng208m06wdgv.gif">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://39092207.github.io/2015/10/21/Untitled/"/>
+
+  <title> 图片之渐进/交错 | 景灵 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">景灵</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">——我要我想要的</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                图片之渐进/交错
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-21T16:57:28+00:00" content="Oct 21 2015">
+              Oct 21 2015
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一、简介  </p>
+<p>　　JPEG、GIF和PNG这三种图像格式都提供了一种功能，让图像能够更快地显示。图像可以以一种特殊方式存储，显示时先大概显示图像的草图，当文件全部下载后再填充细节（百度图片，QQ空间，点点网等显示大图时都使用的这种方式）。这起到一种很有意义的心理效果，因为这样使人们有东西可看，而不必坐着干等大型图像慢慢显示在屏幕上。但这种效果并不是所有浏览器都支持。以这种方式保存的文件叫交错gif、交错png、渐进jpg。<br><a id="more"></a><br>　　在测试各个浏览器（未说明都为最新版本）时发现：</p>
+<p>　　1、Chrome对“渐进”和“交错”都支持良好</p>
+<p>　　2、Safari(PC/MAC)对“渐进”不支持，“交错支持良好”</p>
+<p>　　3、Fiefox对“渐进”和“交错”都支持良好</p>
+<p>　　4、Opera对“渐进”和“交错”都支持良好</p>
+<p>　　5、IE9对“渐进”和“交错”都不支持</p>
+<p>　　测试地址：<a href="http://www.laoshu133.com/Interlace_test/" target="_blank" rel="external">Interlace_test</a><br><!--more--><br>　　图一：基本显示效果演示</p>
+<div style="text-align: center"><br><img src="http://ww3.sinaimg.cn/large/6e6fea89gw1exejmm7vtng208m06wdgv.gif"><br></div>
+
+<p>　　图二：渐进\交错显示效果演示</p>
+<div style="text-align: center"><br><img src="http://ww2.sinaimg.cn/large/6e6fea89gw1exejnc3lxbg208m06w76u.gif"><br></div>
+
+<p>　　图一中我们可以发现图片是从上倒下一条一条逐渐加载的，显示效果如图一的这种JPG压缩模式叫做顺序式编码（Sequential Encoding），一次将图像由左到右、由上到下顺序处理。也是一种常见的JPG编码模式。</p>
+<p>　　图二中我们可以发现同样是一样图片，因为图片较大图，要逐渐加载完我们才知道这张图片的大致轮廓，但是在图二上，由于使用了渐进式JPG格式，在图片加载的时候我们已经可以看到了图片的大致轮廓，这种就是渐进式JPG，使用了递增式编码（Progressive Encoding）。</p>
+<p>　　所以？</p>
+<p>　　所谓的渐进式JPG格式就是采用了递增式编码的JPG，你可以通过谷歌搜索关键字JPG Progressive Encoding查的更多英文的资料，因为我发现国内这方面的介绍不是很多。</p>
+<p>　　这种JPG格式是当图像传输的时间较长时，可将图像分数次处理，以从模糊到清晰的方式来传送图像（效果类似GIF在网络上的传输）。</p>
+<p>二、渐进式JPEG创建</p>
+<p>　　1. php转换</p>
+<p>　　据说是如下的代码：  </p>
+<pre><code>&lt;?php
+$image = imagecreatefromjpeg($this-&gt;attach[&apos;target&apos;]);
+//imagefilter($image, IMG_FILTER_MEAN_REMOVAL);
+imageinterlace($image, 1);//php的GD库中自带的函数
+imagejpeg($image,$this-&gt;attach[&apos;target&apos;]);//生成相应图片
+imagedestroy($image);
+?&gt;
+</code></pre><p>　　其他语言的转换自己去搜吧。</p>
+<p>　　2. photoshop生成</p>
+<p>　　大伙都知道photoshop中有个“存储为web所用格式”，然后，其中（见下图），那个连续勾选就是渐进式JPEG图片了：</p>
+<div style="text-align: center"><br><img src="http://ww1.sinaimg.cn/large/6e6fea89gw1exejphrx0bj20dw06dt9f.jpg"><br></div>
+
+<p>　　据说，需要勾选那个转换为sRGB选项，在某些浏览器下，图像设置为CMYK会出现一些问题<br>  ！</p>
+<div style="text-align: center"><br><img src="http://ww1.sinaimg.cn/large/6e6fea89gw1exejpzb49dj208h03b0sq.jpg"><br></div>
+
+<p>三、总结</p>
+<p>　　Scott Gilbertson对渐进式图片有其他的补充：</p>
+<p>　　1. 你永不知道基本式图片内容，除非他完全加载出来；</p>
+<p>　　2. 渐进式图片一开始大小框架就定好，不会像基本式图片一样，由于尺寸未设定而造成回流——提高的渲染性能；</p>
+<p>　　3. 渐进式图片也有不足，就是吃CPU吃内存。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/21/passport详解/" rel="next" title="passport详解">
+                <i class="fa fa-chevron-left"></i> passport详解
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/23/ssl协议/" rel="prev" title="ssl协议">
+                ssl协议 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="crazyjingling" />
+          <p class="site-author-name" itemprop="name">crazyjingling</p>
+          <p class="site-description motion-element" itemprop="description">crazyjingling's blog | Node.js | javascript</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/crazyjingling" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/mh39092207" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5890829203" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/crazyjingling" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crazyjingling</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

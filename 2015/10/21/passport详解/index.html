@@ -1,0 +1,996 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Courier New:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="crazyjingling" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="转自：http://www.tuicool.com/articles/nMfYNn
+概述　　　　passport.js是Nodejs中的一个做登录验证的中间件，极其灵活和模块化，并且可与Express、Sails等Web框架无缝集成。Passport功能单一，即只能做登录验证，但非常强大，支持本地账号验证和第三方账号登录验证（OAuth和OpenID等），支持大多数Web网站和服务。
+
+官网： h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="passport详解">
+<meta property="og:url" content="https://39092207.github.io/2015/10/21/passport详解/index.html">
+<meta property="og:site_name" content="景灵">
+<meta property="og:description" content="转自：http://www.tuicool.com/articles/nMfYNn
+概述　　　　passport.js是Nodejs中的一个做登录验证的中间件，极其灵活和模块化，并且可与Express、Sails等Web框架无缝集成。Passport功能单一，即只能做登录验证，但非常强大，支持本地账号验证和第三方账号登录验证（OAuth和OpenID等），支持大多数Web网站和服务。
+
+官网： h">
+<meta property="og:updated_time" content="2016-08-06T11:15:23.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="passport详解">
+<meta name="twitter:description" content="转自：http://www.tuicool.com/articles/nMfYNn
+概述　　　　passport.js是Nodejs中的一个做登录验证的中间件，极其灵活和模块化，并且可与Express、Sails等Web框架无缝集成。Passport功能单一，即只能做登录验证，但非常强大，支持本地账号验证和第三方账号登录验证（OAuth和OpenID等），支持大多数Web网站和服务。
+
+官网： h">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://39092207.github.io/2015/10/21/passport详解/"/>
+
+  <title> passport详解 | 景灵 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">景灵</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">——我要我想要的</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                passport详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-21T16:18:31+00:00" content="Oct 21 2015">
+              Oct 21 2015
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p></p><p style="margin:0;padding:0;">转自：<a href="http://www.tuicool.com/articles/nMfYNn" target="_blank" rel="external">http://www.tuicool.com/articles/nMfYNn</a></p><hr style="margin:0;padding:0;"><p></p>
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述　　"></a>概述　　</h3><p>　　passport.js是Nodejs中的一个做登录验证的中间件，极其灵活和模块化，并且可与Express、Sails等Web框架无缝集成。Passport功能单一，即只能做登录验证，但非常强大，支持本地账号验证和第三方账号登录验证（OAuth和OpenID等），支持大多数Web网站和服务。</p>
+<ul>
+<li>官网： <a href="http://passportjs.org/" target="_blank" rel="external">http://passportjs.org/</a></li>
+<li>Github： <a href="http://github.com/jaredhanson/passport" target="_blank" rel="external">http://github.com/jaredhanson/passport</a></li>
+<li>NPM： <a href="https://www.npmjs.org/package/passport" target="_blank" rel="external">https://www.npmjs.org/package/passport</a></li>
+</ul>
+<h3 id="策略（Strategy）"><a href="#策略（Strategy）" class="headerlink" title="策略（Strategy）"></a>策略（Strategy）</h3><a id="more"></a>
+<p>　　策略是passport中最重要的概念。passport模块本身不能做认证，所有的认证方法都以策略模式封装为插件，需要某种认证时将其添加到package.json即可。</p>
+<p>　　策略模式是一种设计模式，它将算法和对象分离开来，通过加载不同的算法来实现不同的行为，适用于相关类的成员相同但行为不同的场景，比如在passport中，认证所需的字段都是用户名、邮箱、密码等，但认证方法是不同的。关于策略模式，本文不详细展开，想了解的推荐阅读<a href="http://www.oschina.net/translate/strategy-design-pattern-in-javascript" target="_blank" rel="external">Javascript中的策略模式</a> ，或者<a href="http://blog.csdn.net/hguisu/article/details/7558249" target="_blank" rel="external">更广泛意义上的策略模式</a>。</p>
+<p>　　依据策略模式，passport支持了众多的验证方案，包括Basic、Digest、OAuth（1.0，和2.0的三种实现）、Bearer等。</p>
+<h5 id="passport和everyauth"><a href="#passport和everyauth" class="headerlink" title="passport和everyauth"></a>passport和everyauth</h5><p>　　Nodejs中做登录验证的有不少，我听说过的有connect-auth、everyauth、passport，以及Mongoose的插件mongoose-auth。</p>
+<p>　　其中passport和everyauth用的比较多。</p>
+<p>　　everyauth也是基于策略模式，但支持的第三方网站和服务比passport要少些。另外everyauth还涉及到view/route和database，耦合程度比passport高，而passport则更专注。</p>
+<p>　　值得一提的是，passport的作者声称正因为他看到<a href="http://stackoverflow.com/questions/11974947/everyauth-vs-passport-js" target="_blank" rel="external">everyauth不能满足他的一些需求</a>所以创建了passport，不过貌似现在everyauth改进了其中的部分缺陷；everyauth的作者则声称它的建立是<a href="http://stackoverflow.com/questions/5765063/node-js-connect-auth-vs-everyauth" target="_blank" rel="external">基于connect-auth的不足</a>上的。</p>
+<p>另外这里有讲到<a href="http://blog.csdn.net/chszs/article/details/24928985" target="_blank" rel="external">选择适合的Node.js授权认证策略</a> ，也讲到了两者的一些不同。</p>
+<h3 id="依赖和安装"><a href="#依赖和安装" class="headerlink" title="依赖和安装"></a>依赖和安装</h3><h5 id="环境依赖"><a href="#环境依赖" class="headerlink" title="环境依赖"></a>环境依赖</h5><p>　　首先你需要Nodejs，然后数据库用来存储用户数据；另外passport作为中间件，需要依赖Express和Connect，还有由于Express 3.x将一些中间件分离出去，因此你还需要先安装它们。其中express-flash是用于显示提示信息的中间件，是可选的，如果需要用到passport中的提示，则需要安装。</p>
+<p>具体的依赖有：</p>
+<ul>
+<li>Express：web框架。或其他支持的框架。</li>
+<li>Connect：中间件框架。</li>
+<li>cookie-parser：Connect的cookie解析中间件。</li>
+<li>express-session：Connect的session解析中间件，依赖于cookie-parser。</li>
+<li>express-flash：express的消息提示中间件，可选，但一般情况下都需要装。</li>
+</ul>
+<h5 id="安装和配置"><a href="#安装和配置" class="headerlink" title="安装和配置"></a>安装和配置</h5><p>　　你最少需要安装一个passport策略来使用它，一般而言本地验证策略passport-local是必装的。</p>
+<pre><code>npm install passport
+npm install passport-local
+</code></pre><p>　　安装完成后需要配置中间件，一般的顺序如下：</p>
+<pre><code>var express = require(&apos;express&apos;);
+var cookieParser = require(&apos;cookie-parser&apos;);
+var session = require(&apos;express-session&apos;);
+var flash = require(&apos;express-flash&apos;);
+var passport = require(&apos;passport&apos;);
+
+...
+
+app.use(cookieParser());
+app.use(session({...}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash())
+</code></pre><p>　　其中重要的是app.use()部分，express中的中间件顺序很重要，注意不要弄错，除非你知道不同中间件间的准确依赖关系。</p>
+<h5 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h5><p>　　passport用的比较多的有local本地验证和OAuth验证，这里讲一下两者的使用。</p>
+<p>　　你也可以看看张丹写的这两篇，<a href="http://blog.fens.me/nodejs-express-passport/" target="_blank" rel="external">Express结合Passport实现登陆认证</a> 和 <a href="http://blog.fens.me/nodejs-oauth-passport/" target="_blank" rel="external">Passport实现社交网络OAuth登陆</a> ，里面的示例覆盖了基本的用法，本文也参考了其中的一些例子。</p>
+<h5 id="local本地验证"><a href="#local本地验证" class="headerlink" title="local本地验证"></a>local本地验证</h5><p>　　本地验证默认使用用户名和密码来进行验证。</p>
+<h6 id="配置策略"><a href="#配置策略" class="headerlink" title="配置策略"></a>配置策略</h6><p>　　在做验证之前，首先需要对策略进行配置，官方的示例如下：</p>
+<pre><code>var passport = require(&apos;passport&apos;)
+  , LocalStrategy = require(&apos;passport-local&apos;).Strategy;
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: &apos;用户名不存在.&apos; });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: &apos;密码不匹配.&apos; });
+      }
+      return done(null, user);
+    });
+  }
+));
+</code></pre><p>　　其中的 User.findOne() 是MongoDB风格的语法，意思是从数据库的User集合中查询一条数据，第一个参数是查询条件，后面是callback，一般在callback中进行后续操作。</p>
+<p>　　这里的逻辑很简单，依次检查 username 、 password ，如果出错则返回错误信息，如果通过则返回 done(null,user) 。</p>
+<h6 id="usernameField"><a href="#usernameField" class="headerlink" title="usernameField"></a>usernameField</h6><p>　　前面说过passport默认使用用户名和密码来验证，但实际上也有很多需要用邮箱来验证的，那么如何实现呢？</p>
+<p>　　passport在策略配置里提供了options参数，用来设置你要验证的字段名称，即usernameField，使用方法如下：</p>
+<pre><code>passport.use(new LocalStrategy({
+    usernameField: &apos;email&apos;,
+    passwordField: &apos;passwd&apos;
+  },
+  function(username, password, done) {
+    // ...
+  }
+));
+</code></pre><p>　　注意，这里的字段名称应该是页面表单提交的名称，即req.body.xxx，而不是user数据库中的字段名称。将options作为LocalStrategy第一个参数传入即可。</p>
+<h6 id="验证回调"><a href="#验证回调" class="headerlink" title="验证回调"></a>验证回调</h6><p>　　passport本身不处理验证，验证方法在策略配置的回调函数里由用户自行设置，它又称为验证回调。验证回调需要返回验证结果，这是由done()来完成的。</p>
+<p>　　在passport.use()里面，done()有三种用法：</p>
+<ul>
+<li>当发生系统级异常时，返回done(err)，这里是数据库查询出错，一般用next(err)，但这里用done(err)，两者的效果相同，都是返回error信息；</li>
+<li>当验证不通过时，返回done(null, false, message)，这里的message是可选的，可通过express-flash调用；</li>
+<li>当验证通过时，返回done(null, user)。</li>
+</ul>
+<h6 id="密码验证"><a href="#密码验证" class="headerlink" title="密码验证"></a>密码验证</h6><p>　　在张丹的教程里密码是明文存储的，在实际中这当然不行，上面的代码里是user.validPassword(password)方法，这并不是passport添加的，而是需要用户自定义。</p>
+<p>一般对密码进行哈希和盐化的Nodejs模块是bcrypt，它提供一个compare方法来验证密码，如何使用它则超出本文的范围，这里就不讲了。</p>
+<h6 id="session序列化与反序列化"><a href="#session序列化与反序列化" class="headerlink" title="session序列化与反序列化"></a>session序列化与反序列化</h6><p>　　验证用户提交的凭证是否正确，是与session中储存的对象进行对比，所以涉及到从session中存取数据，需要做session对象序列化与反序列化。调用代码如下：</p>
+<pre><code>passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+</code></pre><p>　　这里第一段代码是将环境中的user.id序列化到session中，即sessionID，同时它将作为凭证存储在用户cookie中。</p>
+<p>　　第二段代码是从session反序列化，参数为用户提交的sessionID，若存在则从数据库中查询user并存储与req.user中。</p>
+<p>　　这段代码的顺序可以放在passport.use()的前面或后面，但需要在app.configure()之前。</p>
+<h6 id="Authenticate验证"><a href="#Authenticate验证" class="headerlink" title="Authenticate验证"></a>Authenticate验证</h6><p>　　做完了上面这些设置，我们终于可以开始做验证了。</p>
+<pre><code>app.post(&apos;/login&apos;,
+  passport.authenticate(&apos;local&apos;,
+    { successRedirect: &apos;/&apos;,
+     failureRedirect: &apos;/login&apos;,
+     failureFlash: true }),
+  function(req, res) {
+    // 验证成功则调用此回调函数
+    res.redirect(&apos;/users/&apos; + req.user.username);
+  });
+</code></pre><p>　　这里的passport.authenticate(‘local’)就是中间件，若通过就进入后面的回调函数，并且给res加上res.user，若不通过则默认返回401错误。</p>
+<p>　　authenticate()方法有3个参数，第一是name，即验证策略的名称，第二个是options，包括下列属性：</p>
+<ul>
+<li>session：Boolean。设置是否需要session，默认为true</li>
+<li>successRedirect：String。设置当验证成功时的跳转链接</li>
+<li>failureRedirect：String。设置当验证失败时的跳转链接</li>
+<li>failureFlash：Boolean or String。设置为Boolean时，express-flash将调用use()里设置的message。设置为String时将直接调用这里的信息。</li>
+<li>successFlash：Boolean or String。使用方法同上。</li>
+</ul>
+<p>　　第三个参数是callback。注意如果使用了callback，那么验证之后建立session和发出响应都应该由这个callback来做，passport中间件之后不应该再有其他中间件或callback。以下是代码：</p>
+<pre><code>app.get(&apos;/login&apos;, function(req, res, next) {
+  passport.authenticate(&apos;local&apos;, function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.redirect(&apos;/login&apos;); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      return res.redirect(&apos;/users/&apos; + user.username);
+    });
+  })(req, res, next);
+});
+</code></pre><h6 id="HTTP-request操作"><a href="#HTTP-request操作" class="headerlink" title="HTTP request操作"></a>HTTP request操作</h6><p>　　注意上面的代码里有个req.logIn()，它不是http模块原生的方法，也不是express中的方法，而是passport加上的，passport扩展了HTTP request，添加了四种方法。</p>
+<ul>
+<li>logIn(user, options, callback)：用login()也可以。作用是为登录用户初始化session。options可设置session为false，即不初始化session，默认为true。</li>
+<li>logOut()：别名为logout()。作用是登出用户，删除该用户session。不带参数。</li>
+<li>isAuthenticated()：不带参数。作用是测试该用户是否存在于session中（即是否已登录）。若存在返回true。事实上这个比登录验证要用的更多，毕竟session通常会保留一段时间，在此期间判断用户是否已登录用这个方法就行了。</li>
+<li>isUnauthenticated()：不带参数。和上面的作用相反。</li>
+</ul>
+<h6 id="完整示例"><a href="#完整示例" class="headerlink" title="完整示例"></a>完整示例</h6><p>　　基本上passport本地验证的知识点就是这些，下面给出一个相对完整的示例，包括bcrypt的实现，这里借用了nodeclub中的方法，为实现它你需要自己配置hash：</p>
+<pre><code>var express = require(&apos;express&apos;);
+var cookieParser = require(&apos;cookie-parser&apos;);
+var session = require(&apos;express-session&apos;);
+var passport = require(&apos;passport&apos;);
+var LocalStrategy = require(&apos;passport-local&apos;).Strategy;
+//User模型需自己实现
+var User = require(&apos;../models/User&apos;);
+var bcrypt = require(&apos;bcrypt&apos;);
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+//这里的username可以改成前端表单对应的命名，如：
+// &lt;form&gt;&lt;input type=&quot;text&quot; name=&quot;hehe&quot;&gt;...&lt;/form&gt;
+//则这里将所有的username改为hehe
+passport.use(new LocalStrategy({ usernameField: &apos;username&apos; }, function(username, password, done) {
+  //实现用户名或邮箱登录
+  //这里判断提交上的username是否含有@，来决定查询的字段是哪一个
+  var criteria = (username.indexOf(&apos;@&apos;) === -1) ? {username: username} : {email: username};
+  User.findOne(criteria, function(err, user) {
+    if (!user) return done(null, false, { message: &apos;用户名或邮箱 &apos; + username + &apos; 不存在&apos;});
+    bcompare(password, hash, function(err, isMatch) {
+      if (isMatch) {
+        return done(null, user);
+      } else {
+        return done(null, false, { message: &apos;密码不匹配&apos; });
+      }
+    });
+  });
+}));
+
+...
+
+app.use(cookieParser());
+app.use(session({secret: &quot;need change&quot;}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+...
+
+app.post(&apos;/login&apos;, passport.authenticate(&apos;local&apos;, function(err, user, info) {
+    if (err) return next(err);
+    if (!user) {
+      req.flash(&apos;errors&apos;, { msg: info.message });
+      return res.redirect(&apos;/login&apos;);
+    }
+    req.logIn(user, function(err) {
+      if (err) return next(err);
+      req.flash(&apos;success&apos;, { msg: &apos;登录成功！&apos; });
+      res.redirect(&apos;/&apos;);
+    });
+  })(req, res, next)
+);
+//这里getUser方法需要自定义
+app.get(&apos;/user&apos;, isAuthenticated, getUser);
+app.get(&apos;/logout&apos;, function(req, res){
+  req.logout();
+  res.redirect(&apos;/&apos;);
+});
+
+//将req.isAuthenticated()封装成中间件
+var isAuthenticated = function(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.redirect(&apos;/login&apos;);
+};
+
+var bcompare = function (str, hash, callback) {
+bcrypt.compare(str, hash, callback);
+};
+</code></pre><p>　　passport-local模块也包括一些示例，不过这些示例都是Express 3.x时代写的，所以不要原封不动的copy代码。</p>
+<p>　　基本的local验证就讲到这里，下面还有进阶的验证技巧，比如在RESTful API中使用passport，验证多个条件等。</p>
+<h5 id="OAuth验证"><a href="#OAuth验证" class="headerlink" title="OAuth验证"></a>OAuth验证</h5><p>　　OAuth验证是体现passport强大的地方，如果你看过nodeclub的源码，会发现它自己实现了local验证，但它的Github验证是用passport来实现的。</p>
+<p>　　OAuth标准分为两个版本，1.0版和2.0版，两者被使用的都很广泛，passport通过passport-oauth为两者提供支持，使用下面的命令可以安装。</p>
+<pre><code>npm install passport-oauth
+</code></pre><h6 id="OAuth验证流程"><a href="#OAuth验证流程" class="headerlink" title="OAuth验证流程"></a>OAuth验证流程</h6><p>　　OAuth1.0和2.0的使用流程都差不多，一般来说如下：</p>
+<p>１. 为你的app去第三方服务商处申请标识和令牌appkey和secret；</p>
+<p>２. 在你的app里添加按钮或链接，将用户引导至服务商的授权页，用户在这里选择授权给你的app；</p>
+<p>３. 授权成功后跳转回你的app，同时还传递回access_token和一些用户资料。</p>
+<p>４. 到这里首次验证流程就完成了，之后只要拿access_token去就可以做登录验证或者其他事了。</p>
+<h6 id="OAuth1-0"><a href="#OAuth1-0" class="headerlink" title="OAuth1.0"></a>OAuth1.0</h6><p>　　要使用passport OAuth1.0验证你需要先引入：</p>
+<pre><code>var passport = require(&apos;passport&apos;)
+  , OAuthStrategy = require(&apos;passport-oauth&apos;).OAuthStrategy;
+然后是配置：
+
+passport.use(&apos;provider&apos;, new OAuthStrategy({
+  requestTokenURL: &apos;https://www.provider.com/oauth/request_token&apos;,
+  accessTokenURL: &apos;https://www.provider.com/oauth/access_token&apos;,
+  userAuthorizationURL: &apos;https://www.provider.com/oauth/authorize&apos;,
+  consumerKey: &apos;123-456-789&apos;,
+  consumerSecret: &apos;shhh-its-a-secret&apos;
+  callbackURL: &apos;https://www.example.com/auth/provider/callback&apos;
+  },
+  function(token, tokenSecret, profile, done) {
+  User.findOrCreate(..., function(err, user) {
+    done(err, user);
+  });
+  }
+));
+</code></pre><p>　　这里比通用流程多的一点就是，你的App需要先访问第三方服务，获取request token，这个request token是未授权的，等用户授权之后，可以拿这个request token去换取access token。</p>
+<p>在passport中你不必管这些细节，找到第三服务的文档找到对应的URL添上即可。当然你还得申请key和secret。</p>
+<p>use方法的回调接受四个参数，token就是access token，和tokenSecret一起好好保存。profile则是用户在第三方服务上的一些公开资料，它的模型在 这里 ，不过返回的资料不一定全面，在使用前需要验证是否存在。</p>
+<p>OAuth1.0的路由常见写法如下：</p>
+<p>app.get(‘/auth/provider’, passport.authenticate(‘provider’));<br>app.get(‘/auth/provider/callback’,<br>  passport.authenticate(‘provider’, { successRedirect: ‘/‘,<br>                                      failureRedirect: ‘/login’ }));<br>上面就是OAuth1.0的验证流程。</p>
+<p>OAuth1.0主要是一些比较早提供第三方登录功能的网站使用，现在的网站大部分使用OAuth2.0了，新浪微博原先使用的是1.0，现在也改用2.0了。</p>
+<p>OAuth2.0</p>
+<p>OAuth2.0的验证不需要request_token，但比1.0多了scope和refresh token，我们先来看看具体的配置方法：</p>
+<p>var passport = require(‘passport’)<br>  , OAuth2Strategy = require(‘passport-oauth’).OAuth2Strategy;</p>
+<p>passport.use(‘provider’, new OAuth2Strategy({<br>  authorizationURL: ‘<a href="https://www.provider.com/oauth2/authorize" target="_blank" rel="external">https://www.provider.com/oauth2/authorize</a>‘,<br>  tokenURL: ‘<a href="https://www.provider.com/oauth2/token" target="_blank" rel="external">https://www.provider.com/oauth2/token</a>‘,<br>  clientID: ‘123-456-789’,<br>  clientSecret: ‘shhh-its-a-secret’<br>  callbackURL: ‘<a href="https://www.example.com/auth/provider/callback" target="_blank" rel="external">https://www.example.com/auth/provider/callback</a>‘<br>  },<br>  function(accessToken, refreshToken, profile, done) {<br>  User.findOrCreate(…, function(err, user) {<br>    done(err, user);<br>  });<br>  }<br>));<br>refreshToken是重新获取access token的方法，因为access token是有使用期限的，到期了必须让用户重新授权才行，现在有了refresh token，你可以让应用定期的用它去更新access token，这样第三方服务就可以一直绑定了。不过这个方法并不是每个服务商都提供，注意看服务商的文档。</p>
+<p>下面是路由，OAuth1.0也有一点不同：</p>
+<p>app.get(‘/auth/provider’,<br>  passport.authenticate(‘provider’, { scope: ‘email’ })<br>);<br>app.get(‘/auth/provider/callback’,<br>  passport.authenticate(‘provider’, { successRedirect: ‘/‘,<br>                                      failureRedirect: ‘/login’ }));<br>scope是权限范围，需要在服务商处事先申请，想进一步了解可参考微博的scope文档。它可以只有一项，也可以有多项，当为多项时以数组形式表示。</p>
+<p>使用passport-x插件</p>
+<p>passport-oauth包含通用的验证方法，基本山任何提供OAuth的服务都能用上面的方法来验证，但大部分提供第三方登录的网站都有passport的插件，它们的列表见 官网 和 Github wiki 。使用它们可以让app绑定第三方服务更加简单和模块化。</p>
+<p>passport-x插件的一般用法如下（以Github为例）。</p>
+<p>首先安装passport-github，注意这种情况不需要安装passport-oauth：</p>
+<p>npm install passport-github<br>安装完后是配置：</p>
+<p>var passport = require(‘passport’)<br>  , GithubStrategy = require(‘passport-github’).Strategy;</p>
+<p>//passport设置部分<br>passport.use(new GithubStrategy({<br>    clientID: GITHUB_CLIENT_ID,<br>    clientSecret: GITHUB_CLIENT_SECRET,<br>    callbackURL: “<a href="http://www.example.com/auth/github/callback" target="_blank" rel="external">http://www.example.com/auth/github/callback</a>“<br>  },<br>  function(accessToken, refreshToken, profile, done) {<br>    User.findOrCreate(…, function(err, user) {<br>      if (err) { return done(err); }<br>      done(null, user);<br>    });<br>  }<br>));</p>
+<p>…<br>//路由部分<br>app.get(‘/auth/github’, passport.authenticate(‘github’));<br>app.get(‘/auth/github/callback’,<br>  passport.authenticate(‘github’, { failureRedirect: ‘/login’ }),<br>  function(req, res) {<br>    res.redirect(‘/‘);<br>  });<br>与通用OAuth验证流程对比，上面的代码少了服务商的验证页部分，你只需要将获得的appkey和secret填到对应地方即可。</p>
+<p>OAuth验证的逻辑</p>
+<p>OAuth验证的麻烦之处主要是处理逻辑，很多网站将第三方的OAuth作为一种用户注册手段，当用户点击第三方登录时，若用户未注册会为他们创建账号，这里面的逻辑就比较绕了。比如Hackathon Starter的处理逻辑如下：</p>
+<p>/**</p>
+<ul>
+<li>OAuth验证策略概述</li>
+<li></li>
+<li>当用户点击“使用XX登录”链接</li>
+<li><ul>
+<li>若用户已登录</li>
+</ul>
+</li>
+<li><ul>
+<li>检查该用户是否已绑定XX服务</li>
+</ul>
+</li>
+<li><ul>
+<li>如果已绑定，返回错误（不允许账户合并）</li>
+</ul>
+</li>
+<li><ul>
+<li>否则开始验证流程，为该用户绑定XX服务</li>
+</ul>
+</li>
+<li><ul>
+<li>用户未登录</li>
+</ul>
+</li>
+<li><ul>
+<li>检查是否老用户</li>
+</ul>
+</li>
+<li><ul>
+<li>如果是老用户，则登录</li>
+</ul>
+</li>
+<li><ul>
+<li>否则检查OAuth返回profile中的email，是否在用户数据库中存在</li>
+</ul>
+</li>
+<li><ul>
+<li>如果存在，返回错误信息</li>
+</ul>
+</li>
+<li><ul>
+<li>否则创建一个新账号<br>*/<br>另外还有平常验证用户是否已绑定某个服务，可以封装成中间件：</li>
+</ul>
+</li>
+</ul>
+<p>var isAuthorized = function(req, res, next) {</p>
+<p>  if (req.user.provider)) {<br>    next();<br>  } else {<br>    //do something else<br>  }<br>};<br>学习OAuth验证最好的项目是 Hackathon Starter ，它实现了十几种的第三方网站和服务的OAuth验证，推荐学习。下面进阶学习里面还有如何开发一个passport OAuth验证插件。</p>
+<p>进阶学习</p>
+<p>虽然基本用法已经能覆盖一般需求了，但是还是有各种edge case的存在。passport也提供了一些扩展性的功能来应对不同的场景。下面就来讲一下。</p>
+<p>验证多个条件</p>
+<p>有的时候，在登录时不但需要验证用户名和密码，还需要验证一个附加条件，比如Discuz!论坛程序提供的功能：</p>
+<p>20141116005335<br>这种情况passport也是支持的。</p>
+<p>在配置策略的时候，Strategy接受一个options参数，它包含一个passReqToCallback项，默认为false，设置为true时可以将整个req传递给回调函数，这样在回调里就可以验证req中带的所有条件了。示例代码如下：</p>
+<p>passport.use(new LocalStrategy(<br>  {passReqToCallback: true},<br>  function(req, username, password, done) {<br>    // now you can check any req.body.xxx<br>  }<br>));<br>这个方法在OAuth验证中也是支持的。</p>
+<p>使用多种验证策略/匿名登录验证</p>
+<p>最常见的case是贴吧，我们支持已登录的用户发帖，但是对匿名用户也支持发帖回帖，但对它们屏蔽了一些高级用法。</p>
+<p>这里需要用到匿名验证策略passport-anonymous，它的使用非常简单，只需要声明一句就行了：</p>
+<p>passport.use(new AnonymousStrategy());<br>要实现多种验证策略，可如下配置：</p>
+<p>var passport = require(‘passport’)<br>  , LocalStrategy = require(‘passport-local’).Strategy<br>  , AnonymousStrategy = require(‘passport-anonymous’).Strategy;</p>
+<p>  …</p>
+<p>passport.use(new LocalStrategy(<br>  function(username, password, done) {<br>    User.findOne({ username: username }, function(err, user) {<br>      if (err) { return done(err); }<br>      if (!user) {<br>        return done(null, false, { message: ‘用户名不存在.’ });<br>      }<br>      if (!user.validPassword(password)) {<br>        return done(null, false, { message: ‘密码不匹配.’ });<br>      }<br>      return done(null, user);<br>    });<br>  }<br>));<br>//匿名登录认证作为本地认证的fallback<br>passport.use(new AnonymousStrategy());</p>
+<p>…</p>
+<p>app.get(‘/‘,<br>  passport.authenticate([‘local’, ‘anonymous’], { session: false }),<br>  function(req, res){<br>    if (req.user) {<br>      res.json({ msg: “用户已登录”});<br>    } else {<br>      res.json({ msg: “用户以匿名方式登录”});<br>    }<br>  });<br>我们可以看到使用多种验证策略时，可使用数组来将策略名称作为参数传给authenticate方法。</p>
+<p>匿名验证是作为local验证的fallback而存在，当local验证不满足时会调用后面的验证方法。</p>
+<p>理论上讲这种调用方法也可用于其它验证，但不鼓励这么做，它会让用户系统变得极为复杂难以维护。、</p>
+<p>最后注意：使用匿名验证时需要将session设为false，不将匿名用户信息存储到session中。</p>
+<p>游客登录验证</p>
+<p>还有一种使用场景是将所有的匿名用户都视为游客，这样你可以通过用户管理页面来操作所有的游客的信息。</p>
+<p>你可以通过passport-anonymous来实现这一点，将所有的匿名用户都赋予同一个用户ID，但还有一个passport插件来专门做这件事，那就是 passport-dummy ，它的使用方法如下：</p>
+<p>var passport = require(‘passport’)<br>  , DummyStrategy = require(‘passport-dummy’).Strategy;</p>
+<p>// 设置部分<br>passport.use(new DummyStrategy(<br>  function(done) {<br>    return done(null, {username: ‘dummy’});<br>  }<br>));</p>
+<p>// 路由部分<br>app.post(‘/login’,<br>  passport.authenticate(‘dummy’, { failureRedirect: ‘/login’ }),<br>  function(req, res) {<br>    res.redirect(‘/‘);<br>  });<br>实际使用中经常需要与其他验证方法结合起来，比如在上面的多种验证策略中代替匿名登录验证。</p>
+<p>在其他Web框架中使用passport</p>
+<p>这里要明白，passport只是做登录验证的，只是操作session，甚至连验证都是用户自己完成，它本身是个很独立的模块，但是由于其使用了connect中的一些方法，因此与connect有些耦合。</p>
+<p>因此一般的connect-style 的web框架passport都能直接使用，无需适配。</p>
+<p>那么要在其它web框架中如Hapi中能使用passport吗？</p>
+<p>回答是理论上能，但不建议直接这么做。一般这样的框架也应该都有自己的验证模块或插件，如果实在不能满足需求，非要用passport，这里提供一下思路：首先要支持session，然后构造类似express中的req和res，起码要支持res.session各种操作，以及将http request赋值为req。</p>
+<p>这里有 Hapi框架使用passport的教程 ，可以看到非常麻烦， 它本身已经有hapi-auth-cookie和bell模块用于验证，所以不必执着于使用passport。</p>
+<p>在RESTful API中使用passport</p>
+<p>RESTful API的验证分为两种情况。一种是面向自己app的用户，其验证和http验证一样。另一种是向第三方提供的API，这种情况下可能每次连接都需要验证，反而不需要用到session了。passport也支持这样的做法。</p>
+<p>想要每次连接都进行验证，只需将authenticate方法作为中间件添加到需要验证的URL里，然后将session设为false：</p>
+<p>app.get(‘/api/users/me’,<br>  passport.authenticate(‘basic’, { session: false }),<br>  function(req, res) {<br>    res.json({ id: req.user.id, username: req.user.username });<br>  });<br>这样每次连接都需要经过authenticate，并且不会被记录在session里。</p>
+<p>制作passport插件</p>
+<p>passport以插件的形式支持了很多第三方网站和服务的OAuth验证，但并不是所有的，如果你需要在app中用到第三方的服务，但它们没有对应的passport插件，你可以用通用的OAuth或其他验证方法来进行验证，也可以将它们封装成passport-x插件。</p>
+<p>制作passport插件并不困难，因为它只是对策略的配置部分进行了一些封装而已，你可以将一个已有的passport插件稍微修改即可。</p>
+<p>比如要制作一个OAuth2.0的passport插件，你可以以passport-github为模板，甚至只需要修改它的 strategy.js ，步骤总结如下：</p>
+<p>将所有带github.com的地址修改为对应的地址；<br>将github、passport-github修改为你需要的服务的名称。<br>没错，就是这么简单！</p>
+<p>如果仅仅为自己使用，上面的步骤已经足够，但你还可以将它们分享出来给别人使用，这需要额外的步骤：</p>
+<p>修改example/login，以及readme.md，并测试；<br>将你的插件发布到Github和npm上；<br>给passport作者 Jared Hanson 发邮件，或者到 passport的Github页面 上发issue，将插件添加到provider list上。<br>现在你也是passport的贡献者了！~</p>
+<p>更多的验证方案</p>
+<p>上面我们只是讲到了local验证和OAuth验证，以及提到了一下anonymous验证，但实际上passport支持的验证方法不止这几种，具体支持的验证方案可以参见 这个页面 。</p>
+<p>在多数时候，我们只需要引入这些实现方案，就可以进行验证。</p>
+<p>这里的验证方案在我们想向第三方app提供RESTful API时非常有用。</p>
+<p>推荐项目</p>
+<p>一些学习passport具体实现的Nodejs项目。</p>
+<p>Hackathon Starter ：实现了超过10个第三方服务OAuth登录验证。<br>nodeclub ：实现Github OAuth验证。<br>参考链接</p>
+<p>passport官方文档 ：本文的覆盖面已超过官方文档。<br>Express结合Passport实现登陆认证 ：张丹博客，基本用法，有完整示例<br>Passport实现社交网络OAuth登陆 ：张丹博客，基本用法，有Github和LinkedIn示例<br>用NodeJS完成简单的身份验证 ：一篇译文，包括local验证和Github示例<br>NodeCoffee实录 – 登录认证 ：用CoffeeScript写passport示例<br>OAuth 2和passport框架 ：讲OAuth2.0原理和passport基本示例<br>（全文完）</p>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><p><strong>1. passport.js学习笔记</strong>：<a href="http://www.tuicool.com/articles/nMfYNn" target="_blank" rel="external">http://www.tuicool.com/articles/nMfYNn</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/13/搜狗输入法mac下全半角切换快捷键/" rel="next" title="搜狗输入法mac下全半角切换快捷键">
+                <i class="fa fa-chevron-left"></i> 搜狗输入法mac下全半角切换快捷键
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/21/Untitled/" rel="prev" title="图片之渐进/交错">
+                图片之渐进/交错 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="crazyjingling" />
+          <p class="site-author-name" itemprop="name">crazyjingling</p>
+          <p class="site-description motion-element" itemprop="description">crazyjingling's blog | Node.js | javascript</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/crazyjingling" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/mh39092207" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5890829203" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/crazyjingling" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述　　</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#策略（Strategy）"><span class="nav-number">2.</span> <span class="nav-text">策略（Strategy）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#passport和everyauth"><span class="nav-number">2.0.1.</span> <span class="nav-text">passport和everyauth</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#依赖和安装"><span class="nav-number">3.</span> <span class="nav-text">依赖和安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#环境依赖"><span class="nav-number">3.0.1.</span> <span class="nav-text">环境依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安装和配置"><span class="nav-number">3.0.2.</span> <span class="nav-text">安装和配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基本用法"><span class="nav-number">3.0.3.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#local本地验证"><span class="nav-number">3.0.4.</span> <span class="nav-text">local本地验证</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#配置策略"><span class="nav-number">3.0.4.1.</span> <span class="nav-text">配置策略</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#usernameField"><span class="nav-number">3.0.4.2.</span> <span class="nav-text">usernameField</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#验证回调"><span class="nav-number">3.0.4.3.</span> <span class="nav-text">验证回调</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#密码验证"><span class="nav-number">3.0.4.4.</span> <span class="nav-text">密码验证</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#session序列化与反序列化"><span class="nav-number">3.0.4.5.</span> <span class="nav-text">session序列化与反序列化</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Authenticate验证"><span class="nav-number">3.0.4.6.</span> <span class="nav-text">Authenticate验证</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#HTTP-request操作"><span class="nav-number">3.0.4.7.</span> <span class="nav-text">HTTP request操作</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#完整示例"><span class="nav-number">3.0.4.8.</span> <span class="nav-text">完整示例</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#OAuth验证"><span class="nav-number">3.0.5.</span> <span class="nav-text">OAuth验证</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#OAuth验证流程"><span class="nav-number">3.0.5.1.</span> <span class="nav-text">OAuth验证流程</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#OAuth1-0"><span class="nav-number">3.0.5.2.</span> <span class="nav-text">OAuth1.0</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文献"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crazyjingling</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

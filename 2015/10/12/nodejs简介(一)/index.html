@@ -1,0 +1,678 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Courier New:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="crazyjingling" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.jpg?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="我们需要的不只是极速前进。
+node.js简介
+　　JavaScript是一种运行在浏览器的脚本，它简单，轻巧，易于编辑，这种脚本通常用于浏览器的前端编程，但是一位开发者Ryan有一天发现这种前端式的脚本语言可以运行在服务器上的时候，一场席卷全球的风暴就开始了。   ——百度百科
+
+基于V8引擎 ：实际上node.js是对Google V8引擎进行了封装。V8引擎执行Javascript的速度非常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nodejs简介（一）">
+<meta property="og:url" content="https://39092207.github.io/2015/10/12/nodejs简介(一)/index.html">
+<meta property="og:site_name" content="景灵">
+<meta property="og:description" content="我们需要的不只是极速前进。
+node.js简介
+　　JavaScript是一种运行在浏览器的脚本，它简单，轻巧，易于编辑，这种脚本通常用于浏览器的前端编程，但是一位开发者Ryan有一天发现这种前端式的脚本语言可以运行在服务器上的时候，一场席卷全球的风暴就开始了。   ——百度百科
+
+基于V8引擎 ：实际上node.js是对Google V8引擎进行了封装。V8引擎执行Javascript的速度非常">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/6e6fea89gw1ewzi0ek68uj207808274e.jpg">
+<meta property="og:updated_time" content="2016-08-06T11:15:23.443Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nodejs简介（一）">
+<meta name="twitter:description" content="我们需要的不只是极速前进。
+node.js简介
+　　JavaScript是一种运行在浏览器的脚本，它简单，轻巧，易于编辑，这种脚本通常用于浏览器的前端编程，但是一位开发者Ryan有一天发现这种前端式的脚本语言可以运行在服务器上的时候，一场席卷全球的风暴就开始了。   ——百度百科
+
+基于V8引擎 ：实际上node.js是对Google V8引擎进行了封装。V8引擎执行Javascript的速度非常">
+<meta name="twitter:image" content="http://ww2.sinaimg.cn/large/6e6fea89gw1ewzi0ek68uj207808274e.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="https://39092207.github.io/2015/10/12/nodejs简介(一)/"/>
+
+  <title> nodejs简介（一） | 景灵 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">景灵</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">——我要我想要的</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                nodejs简介（一）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-10-12T14:03:23+00:00" content="Oct 12 2015">
+              Oct 12 2015
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我们需要的不只是极速前进。</p>
+<h4 id="node-js简介"><a href="#node-js简介" class="headerlink" title="node.js简介"></a>node.js简介</h4><blockquote>
+<p>　　JavaScript是一种运行在浏览器的脚本，它简单，轻巧，易于编辑，这种脚本通常用于浏览器的前端编程，但是一位开发者Ryan有一天发现这种前端式的脚本语言可以运行在服务器上的时候，一场席卷全球的风暴就开始了。   ——<a href="http://baike.baidu.com/link?url=1sYInLjt-1V_9AdlotIfH27i1vUB1__me8LePm4JfeCq2ekd3-1g5oTlSYJerMi9Okb-0B11vzTtfT332IDLijaeuaafGoqwpdNH5NowUhxzITmg_F5y0ZY5-fSbVqrFdVakVTyCK4oK1Ws117dYIK" target="_blank" rel="external">百度百科</a></p>
+<ul>
+<li><strong>基于<a href="http://impd.tencent.com/?p=35" target="_blank" rel="external">V8引擎</a></strong> ：实际上node.js是对Google V8引擎进行了封装。V8引擎执行Javascript的速度非常快，性能非常好。Node对一些特殊用例进行了优化，提供了替代的API，使得V8在非浏览器环境下运行得更好。</li>
+</ul>
+</blockquote>
+<pre><code>V8是基于BSD许可证的开源软件
+V8速度非常快
+V8有垃圾回收功能
+V8专注于网络功能，在HTTP、DNS、TCP等方面更加成熟
+V8引擎作为一种动态语言运行时平台，需要实现动态语言源程序解析、执行，基本流程如下：
+</code></pre><p><div style="text-align: center"><br><img src="http://ww2.sinaimg.cn/large/6e6fea89gw1ewzi0ek68uj207808274e.jpg"><br></div><a id="more"></a></p>
+<pre><code>其中各部分非固定不变，主要有以下模式：
+
+1）虚拟机模式：编译成AST或字节码后，执行环境提供AST或字节码的执行。
+2）本地代码模式：直接把字节码翻译成机器码，由CPU进行执行，类似静态语言。
+3）混合模式：部分代码翻译成机器码，同时需运行时提供一些语言级别的动态访问能力。
+其中虚拟机模式较为常用，实现简单且移于移植，但执行速度较慢；本地代码模式执行速度较快，对动态语言的支持复杂度较大；混合模式介于两者之间，将常用代码编译成机器码以提高执行速度。
+用于提供动态语言特性支持的运行时环境，主要需要实现以下内部分内容：
+1）对象模型，用于实现语言级别的泛型支持。
+2）变量存储、访问、传递、回收。
+3）调度控制，实现模拟CPU实现的语句调度等。
+
+注：AST是抽象语法树abstract syntax tree的缩写。构造 JavaScript 抽象语法树有多种工具，比如 v8、SpiderMonkey、UglifyJS 等
+</code></pre><ul>
+<li><strong>使用事件驱动，非阻塞I/O 模型</strong> ：非常适合在分布式设备上运行的数据密集型的实时应用。</li>
+</ul>
+<h3 id="node-js版本演进"><a href="#node-js版本演进" class="headerlink" title="node.js版本演进"></a>node.js版本演进</h3><p>　　node.js版本及更新内容详见 <a href="https://github.com/nodejs/node/blob/v4.2.0/CHANGELOG.md" target="_blank" rel="external">https://github.com/nodejs/node/blob/v4.2.0/CHANGELOG.md</a></p>
+<ul>
+<li><strong>2015-09-08（4.0.0 Stable）</strong>：node.js与io.js合并。1.默认启用ES6的大多数新特性，2.所使用的V8引擎升级到了最新版本，与chrome浏览器同步，3.对ARM平台的支持拓展到了ARMv6、ARMv7、以及最新64位ARMv8处理器，物联网开发者将受益。</li>
+</ul>
+<h3 id="登录验证"><a href="#登录验证" class="headerlink" title="登录验证"></a>登录验证</h3><p>　　Nodejs中做登录验证的有不少，我听说过的有connect-auth、everyauth、passport，以及Mongoose的插件mongoose-auth。</p>
+<p>　　其中passport和everyauth用的比较多。</p>
+<p><strong>1. passport</strong>：<a href="http://www.tuicool.com/articles/nMfYNn" target="_blank" rel="external">http://www.tuicool.com/articles/nMfYNn</a></p>
+<p>　1) 官网： <a href="http://passportjs.org/" target="_blank" rel="external">http://passportjs.org/</a></p>
+<p>　2) Github： <a href="http://github.com/jaredhanson/passport" target="_blank" rel="external">http://github.com/jaredhanson/passport</a></p>
+<p>　3) NPM： <a href="https://www.npmjs.org/package/passport" target="_blank" rel="external">https://www.npmjs.org/package/passport</a></p>
+<p><strong>2. everyauth</strong>：</p>
+<p><strong>3. connect-auth</strong>：</p>
+<p><strong>4. mongoose-auth</strong>：</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/10/09/常用工具站点/" rel="next" title="常用工具站点">
+                <i class="fa fa-chevron-left"></i> 常用工具站点
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/10/12/名词解释/" rel="prev" title="名词解释">
+                名词解释 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/img/avatar.jpg"
+               alt="crazyjingling" />
+          <p class="site-author-name" itemprop="name">crazyjingling</p>
+          <p class="site-description motion-element" itemprop="description">crazyjingling's blog | Node.js | javascript</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/crazyjingling" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/mh39092207" target="_blank" title="twitter">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/5890829203" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/crazyjingling" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#node-js简介"><span class="nav-number">1.</span> <span class="nav-text">node.js简介</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#node-js版本演进"><span class="nav-number"></span> <span class="nav-text">node.js版本演进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登录验证"><span class="nav-number"></span> <span class="nav-text">登录验证</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">crazyjingling</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
