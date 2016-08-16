@@ -339,7 +339,7 @@
       
         
           
-            <p>在项目中要按时间排序分页，但是由于时间的精度不够（默认精确到秒<code>s</code>），导致排序分页时数据重复或者缺失。</p>
+            <p>　　在项目中要按时间排序分页，但是由于时间的精度不够（默认精确到秒<code>s</code>），导致排序分页时数据重复或者缺失。</p>
 <p>　　这个问题在<code>5.6.4</code>以前的版本mysql中常用的解决办法就是用两个字段存储时间;</p>
 <p>　　不过mysql在<code>5.6.4</code>版本之后支持了精度设置，支持定义<code>time(n)</code>、<code>datetime(n)</code>或者<code>timestamp(n)</code>这样的字段，然后使用 <code>current_timestamp(n)</code> 即可以为该字段赋值带有毫秒或微秒值的时间数据了！</p>
 
