@@ -264,6 +264,118 @@
             
               
                 
+                <a class="post-title-link" href="/2015/03/15/mongodb和redis设计原理简析/" itemprop="url">
+                  mongodb和redis设计原理简析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-15T00:00:00+00:00" content="Mar 15 2015">
+              Mar 15 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/mongodb/" itemprop="url" rel="index">
+                    <span itemprop="name">mongodb</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="来源：http-blog-csdn-net-yangbutao-article-details-8309539"><a href="#来源：http-blog-csdn-net-yangbutao-article-details-8309539" class="headerlink" title="来源：http://blog.csdn.net/yangbutao/article/details/8309539"></a>来源：<a href="http://blog.csdn.net/yangbutao/article/details/8309539" target="_blank" rel="external">http://blog.csdn.net/yangbutao/article/details/8309539</a></h2>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/03/14/express4-x/" itemprop="url">
                   express4.x
                 </a>
@@ -741,143 +853,6 @@
 </ul>
 </li>
 </ol>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/03/14/让人纠结的mongoose/" itemprop="url">
-                  让人纠结的mongoose
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-03-14T11:41:10+00:00" content="Mar 14 2015">
-              Mar 14 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mongoose/" itemprop="url" rel="index">
-                    <span itemprop="name">mongoose</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>var mongoose = require(‘mongoose’);<br>var Schema = mongoose.Schema;<br>var ObjectId = Schema.Types.ObjectId;<br>var moment = require(‘moment’);<br>var postFind = require(‘mongoose-post-find’);<br>var mongooseHidden = require(“mongoose-hidden”)({ defaultHidden: {_id:true,__v:true} });<br>var stepSchema = new Schema({//加载图片<br>    imgUrl: {<br>        type: String,<br>        required: true<br>    },<br>    timePoint: {//截止时间节点<br>        type: Number<br>    }<br>},{<br>    id:false,<br>    toObject: {getters: true},<br>    toJSON: {getters: true}<br>});<br>//TODO:id及虚拟id的问题<br>var cardCommentSchema = new Schema({//卡片评论、回复</p>
-<pre><code>commentUser: {//评论者
-    type: ObjectId,
-    ref: &apos;UserV2&apos;,
-    required: true
-},
-targetUser: {//评论对象
-    type: ObjectId,
-    ref: &apos;UserV2&apos;
-},
-content: {//内容
-    type: String,
-    required: true
-},
-isReported: {//举报
-    type: Boolean,
-    default: false
-},
-createdAt: {
-    type: Date,
-    required: true,
-    default: Date.now
-}
-</code></pre><p>},{<br>    id:false,<br>    toObject: {getters: true},<br>    toJSON: {getters: true}<br>});<br>var cardSchema = new Schema({<br>    owner: {//卡片作者<br>        type: ObjectId,<br>        ref: ‘UserV2’,<br>        required: true<br>    }, //own user id<br>    title: {//标题<br>        type: String,<br>        required: true,<br>        validate: function (val) {<br>            return val.length &lt;= 20;<br>        }<br>    },<br>    description: {//描述<br>        type: String,<br>        default: ‘’<br>    },<br>    soundStory: {<br>        type: String,<br>        default: ‘’<br>    },<br>    steps: {//图片顺序及播放时间、<br>        type: [stepSchema]<br>    },<br>    comments: {//评论<br>        type: [cardCommentSchema]<br>    },<br>    playUsers: {//播放者<br>        type: [ObjectId]<br>    },<br>    praiseUsers: {//收藏（点赞）者<br>        type: [ObjectId]<br>    },<br>    downloadUsers: {//下载者<br>        type: [ObjectId]<br>    },<br>    sharedUsers: {//分享者<br>        type: [ObjectId]<br>    },<br>    reportUsers: {//举报者<br>        type: [ObjectId]<br>    },<br>    color: {//颜色<br>        type: String,<br>        default: ‘’<br>    },<br>    isRecommended: {//推荐<br>        stateType: {<br>            type: String,<br>            default: ‘undone’,<br>            enum: [‘done’, ‘undone’, ‘waiting’]//推荐过，未被推荐过，等待被推荐<br>        },<br>        recommendAt: {<br>            type: Date<br>        }<br>    },<br>    createdAt: {<br>        type: Date,<br>        required: true,<br>        default: Date.now<br>    },<br>    updatedAt: {<br>        type: Date,<br>        required: true,<br>        default: Date.now<br>    }<br>}, {<br>    id:false,<br>    toObject: {getters: true},<br>    toJSON: {getters: true}<br>});<br>stepSchema.virtual(“stepId”).get(function(){<br>    return this._id<br>});<br>cardCommentSchema.virtual(“commentId”).get(function(){<br>    return this._id<br>});<br>cardSchema.virtual(“cardId”).get(function(){<br>    return this._id<br>});<br>cardSchema.virtual(“commentCount”).get(function () {<br>    return (this.comments &amp;&amp; this.comments.length) || 0;<br>});<br>cardSchema.virtual(“downloadCount”).get(function () {<br>    return (this.downloadUsers &amp;&amp; this.downloadUsers.length) || 0;<br>});<br>cardSchema.virtual(“praiseCount”).get(function () {<br>    return (this.praiseUsers &amp;&amp; this.praiseUsers.length) || 0;<br>});<br>cardSchema.virtual(“sharedCount”).get(function () {<br>    return (this.sharedUsers &amp;&amp; this.sharedUsers.length) || 0;<br>});<br>cardSchema.virtual(“playCount”).get(function () {<br>    return (this.playUsers &amp;&amp; this.playUsers.length) || 0;<br>});<br>cardSchema.virtual(“isReported”).get(function () {<br>    return (this.reportUsers &amp;&amp; this.reportUsers.length) ? true : false;<br>});<br>cardSchema.virtual(“playCount”).get(function(){<br>    return (this.playUsers&amp;&amp;this.playUsers.length)||0;<br>});<br>cardSchema.options.toObject.hide = ‘_id’;<br>cardSchema.options.toObject.transform = function (doc, ret, options) {<br>    // remove the _id of every document before returning the result<br>    delete ret._id;<br>};<br>stepSchema.options.toObject.transform = function (doc, ret, options) {<br>    // remove the _id of every document before returning the result<br>    delete ret._id;<br>};<br>//cardSchema.plugin(mongooseHidden);<br>//cardCommentSchema.plugin(mongooseHidden);<br>//stepSchema.plugin(mongooseHidden);<br>////cardSchema.plugin(require(‘mongoose-toobject’), { hide: ‘_id’ });<br>//var postFind = require(‘mongoose-post-find’);<br>//cardSchema.plugin(postFind, {<br>//<br>//    find: function(results,done) {<br>//        console.log(cardSchema.options);<br>//        for(var i=0;i&lt;results.length;i++){<br>//            results[i]._doc.cardId = results[i]._id;<br>//            delete results[i]._doc._id;<br>//            delete results[i]._doc.<strong>v;<br>//            for(var j=0;j&lt; results[i].steps.length;j++){<br>//                results[i].steps[j]._doc.stepId =  results[i].steps[j]._doc._id;<br>//                delete  results[i].steps[j]._doc._id;<br>//            }<br>//        }<br>//<br>//        done(null, results); //Results must be passed to callback<br>//    },<br>//    findOne: [<br>//        function(result, done) {<br>//            result._doc.cardId = result._id;<br>//            delete result._doc._id;<br>//            delete result._doc.</strong>v;<br>//            for(var j=0;j&lt; result.steps.length;j++){<br>//                result.steps[j]._doc.stepId =  result.steps[j]._doc._id;<br>//                delete  result.steps[j]._doc._id;<br>//            }<br>//            done(null, result)<br>//        }<br>//    ]<br>//});</p>
-<p>module.exports = cardSchema;</p>
 
           
         
@@ -1431,8 +1406,8 @@ createdAt: {
             
               
                 
-                <a class="post-title-link" href="/2014/10/01/git撤销操作/" itemprop="url">
-                  git撤销操作（转）
+                <a class="post-title-link" href="/2015/03/14/让人纠结的mongoose/" itemprop="url">
+                  让人纠结的mongoose
                 </a>
               
             
@@ -1445,8 +1420,8 @@ createdAt: {
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-10-01T22:40:00+00:00" content="Oct 1 2014">
-              Oct 1 2014
+            <time itemprop="dateCreated" datetime="2015-03-14T11:41:10+00:00" content="Mar 14 2015">
+              Mar 14 2015
             </time>
           </span>
 
@@ -1459,32 +1434,8 @@ createdAt: {
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/git/" itemprop="url" rel="index">
-                    <span itemprop="name">git</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/git/转载/" itemprop="url" rel="index">
-                    <span itemprop="name">转载</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/git/转载/整理/" itemprop="url" rel="index">
-                    <span itemprop="name">整理</span>
+                  <a href="/categories/mongoose/" itemprop="url" rel="index">
+                    <span itemprop="name">mongoose</span>
                   </a>
                 </span>
 
@@ -1518,9 +1469,32 @@ createdAt: {
       
         
           
-            <p>来源: <a href="https://github.com/geeeeeeeeek/git-recipes/wiki/5.2-%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A%EF%BC%9AReset%E3%80%81Checkout%E3%80%81Revert%E7%9A%84%E9%80%89%E6%8B%A9" target="_blank" rel="external">https://github.com/geeeeeeeeek/git-recipes/wiki/5.2-%E4%BB%A3%E7%A0%81%E5%9B%9E%E6%BB%9A%EF%BC%9AReset%E3%80%81Checkout%E3%80%81Revert%E7%9A%84%E9%80%89%E6%8B%A9</a></p>
-<p>　　原文对 git checkout, git reset, git revert 进行了非常清晰的介绍.</p>
-<table><br><thead><br><tr><br><th align="center">命令</th><br><th align="center">作用域</th><br><th align="left">常用情景</th><br></tr><br></thead><br><tbody><br><tr><br><td align="center">git reset</td><br><td align="center">提交层面</td><br><td align="left">在私有分支上舍弃一些没有提交的更改</td><br></tr><br><tr><br><td align="center">git reset</td><br><td align="center">文件层面</td><br><td align="left">将文件从缓存区中移除</td><br></tr><br><tr><br><td align="center">git checkout</td><br><td align="center">提交层面</td><br><td align="left">切换分支或查看旧版本</td><br></tr><br><tr><br><td align="center">git checkout</td><br><td align="center">文件层面</td><br><td align="left">舍弃工作目录中的更改</td><br></tr><br><tr><br><td align="center">git revert</td><br><td align="center">提交层面</td><br><td align="left">在公共分支上回滚更改</td><br></tr><br><tr><br><td align="center">git revert</td><br><td align="center">文件层面</td><br><td align="left">（然而并没有）</td><br></tr><br></tbody><br></table>
+            <p>var mongoose = require(‘mongoose’);<br>var Schema = mongoose.Schema;<br>var ObjectId = Schema.Types.ObjectId;<br>var moment = require(‘moment’);<br>var postFind = require(‘mongoose-post-find’);<br>var mongooseHidden = require(“mongoose-hidden”)({ defaultHidden: {_id:true,__v:true} });<br>var stepSchema = new Schema({//加载图片<br>    imgUrl: {<br>        type: String,<br>        required: true<br>    },<br>    timePoint: {//截止时间节点<br>        type: Number<br>    }<br>},{<br>    id:false,<br>    toObject: {getters: true},<br>    toJSON: {getters: true}<br>});<br>//TODO:id及虚拟id的问题<br>var cardCommentSchema = new Schema({//卡片评论、回复</p>
+<pre><code>commentUser: {//评论者
+    type: ObjectId,
+    ref: &apos;UserV2&apos;,
+    required: true
+},
+targetUser: {//评论对象
+    type: ObjectId,
+    ref: &apos;UserV2&apos;
+},
+content: {//内容
+    type: String,
+    required: true
+},
+isReported: {//举报
+    type: Boolean,
+    default: false
+},
+createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now
+}
+</code></pre><p>},{<br>    id:false,<br>    toObject: {getters: true},<br>    toJSON: {getters: true}<br>});<br>var cardSchema = new Schema({<br>    owner: {//卡片作者<br>        type: ObjectId,<br>        ref: ‘UserV2’,<br>        required: true<br>    }, //own user id<br>    title: {//标题<br>        type: String,<br>        required: true,<br>        validate: function (val) {<br>            return val.length &lt;= 20;<br>        }<br>    },<br>    description: {//描述<br>        type: String,<br>        default: ‘’<br>    },<br>    soundStory: {<br>        type: String,<br>        default: ‘’<br>    },<br>    steps: {//图片顺序及播放时间、<br>        type: [stepSchema]<br>    },<br>    comments: {//评论<br>        type: [cardCommentSchema]<br>    },<br>    playUsers: {//播放者<br>        type: [ObjectId]<br>    },<br>    praiseUsers: {//收藏（点赞）者<br>        type: [ObjectId]<br>    },<br>    downloadUsers: {//下载者<br>        type: [ObjectId]<br>    },<br>    sharedUsers: {//分享者<br>        type: [ObjectId]<br>    },<br>    reportUsers: {//举报者<br>        type: [ObjectId]<br>    },<br>    color: {//颜色<br>        type: String,<br>        default: ‘’<br>    },<br>    isRecommended: {//推荐<br>        stateType: {<br>            type: String,<br>            default: ‘undone’,<br>            enum: [‘done’, ‘undone’, ‘waiting’]//推荐过，未被推荐过，等待被推荐<br>        },<br>        recommendAt: {<br>            type: Date<br>        }<br>    },<br>    createdAt: {<br>        type: Date,<br>        required: true,<br>        default: Date.now<br>    },<br>    updatedAt: {<br>        type: Date,<br>        required: true,<br>        default: Date.now<br>    }<br>}, {<br>    id:false,<br>    toObject: {getters: true},<br>    toJSON: {getters: true}<br>});<br>stepSchema.virtual(“stepId”).get(function(){<br>    return this._id<br>});<br>cardCommentSchema.virtual(“commentId”).get(function(){<br>    return this._id<br>});<br>cardSchema.virtual(“cardId”).get(function(){<br>    return this._id<br>});<br>cardSchema.virtual(“commentCount”).get(function () {<br>    return (this.comments &amp;&amp; this.comments.length) || 0;<br>});<br>cardSchema.virtual(“downloadCount”).get(function () {<br>    return (this.downloadUsers &amp;&amp; this.downloadUsers.length) || 0;<br>});<br>cardSchema.virtual(“praiseCount”).get(function () {<br>    return (this.praiseUsers &amp;&amp; this.praiseUsers.length) || 0;<br>});<br>cardSchema.virtual(“sharedCount”).get(function () {<br>    return (this.sharedUsers &amp;&amp; this.sharedUsers.length) || 0;<br>});<br>cardSchema.virtual(“playCount”).get(function () {<br>    return (this.playUsers &amp;&amp; this.playUsers.length) || 0;<br>});<br>cardSchema.virtual(“isReported”).get(function () {<br>    return (this.reportUsers &amp;&amp; this.reportUsers.length) ? true : false;<br>});<br>cardSchema.virtual(“playCount”).get(function(){<br>    return (this.playUsers&amp;&amp;this.playUsers.length)||0;<br>});<br>cardSchema.options.toObject.hide = ‘_id’;<br>cardSchema.options.toObject.transform = function (doc, ret, options) {<br>    // remove the _id of every document before returning the result<br>    delete ret._id;<br>};<br>stepSchema.options.toObject.transform = function (doc, ret, options) {<br>    // remove the _id of every document before returning the result<br>    delete ret._id;<br>};<br>//cardSchema.plugin(mongooseHidden);<br>//cardCommentSchema.plugin(mongooseHidden);<br>//stepSchema.plugin(mongooseHidden);<br>////cardSchema.plugin(require(‘mongoose-toobject’), { hide: ‘_id’ });<br>//var postFind = require(‘mongoose-post-find’);<br>//cardSchema.plugin(postFind, {<br>//<br>//    find: function(results,done) {<br>//        console.log(cardSchema.options);<br>//        for(var i=0;i&lt;results.length;i++){<br>//            results[i]._doc.cardId = results[i]._id;<br>//            delete results[i]._doc._id;<br>//            delete results[i]._doc.<strong>v;<br>//            for(var j=0;j&lt; results[i].steps.length;j++){<br>//                results[i].steps[j]._doc.stepId =  results[i].steps[j]._doc._id;<br>//                delete  results[i].steps[j]._doc._id;<br>//            }<br>//        }<br>//<br>//        done(null, results); //Results must be passed to callback<br>//    },<br>//    findOne: [<br>//        function(result, done) {<br>//            result._doc.cardId = result._id;<br>//            delete result._doc._id;<br>//            delete result._doc.</strong>v;<br>//            for(var j=0;j&lt; result.steps.length;j++){<br>//                result.steps[j]._doc.stepId =  result.steps[j]._doc._id;<br>//                delete  result.steps[j]._doc._id;<br>//            }<br>//            done(null, result)<br>//        }<br>//    ]<br>//});</p>
+<p>module.exports = cardSchema;</p>
+
           
         
       
@@ -1593,7 +1567,7 @@ createdAt: {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-count">73</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1601,7 +1575,7 @@ createdAt: {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1610,7 +1584,7 @@ createdAt: {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-count">102</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

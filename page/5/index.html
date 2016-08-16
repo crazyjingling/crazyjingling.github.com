@@ -264,6 +264,119 @@
             
               
                 
+                <a class="post-title-link" href="/2015/03/15/apt-get命令/" itemprop="url">
+                  apt-get命令
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-15T14:21:43+00:00" content="Mar 15 2015">
+              Mar 15 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">apt-get update</div><div class="line">    #在修改/etc/apt/sources.list或者/etc/apt/preferences之後运行该命令。此外您需要定期运行这一命令以确保您的软件包列表是最新的。</div><div class="line">apt-get install packagename</div><div class="line">    #安装一个新软件包（参见下文的aptitude）</div><div class="line">apt-get remove packagename</div><div class="line">    #卸载一个已安装的软件包（保留配置文件）</div><div class="line">apt-get --purge remove packagename</div><div class="line">    #卸载一个已安装的软件包（删除配置文件）</div><div class="line">dpkg --force-all --purge packagename</div><div class="line">    #有些软件很难卸载，而且还阻止了别的软件的应用，就可以用这个，不过有点冒险。</div><div class="line">apt-get autoclean</div><div class="line">    #apt会把已装或已卸的软件都备份在硬盘上，所以如果需要空间的话，可以让这个命令来删除你已经删掉的软件</div><div class="line">apt-get clean</div><div class="line">    #这个命令会把安装的软件的备份也删除，不过这样不会影响软件的使用的。</div><div class="line">apt-get upgrade</div><div class="line">    #更新所有已安装的软件包</div><div class="line">apt-get dist-upgrade</div><div class="line">    #将系统升级到新版本</div><div class="line">apt-cache search string</div><div class="line">    #在软件包列表中搜索字符串</div><div class="line">dpkg -l package-name-pattern</div><div class="line">    #列出所有与模式相匹配的软件包。如果您不知道软件包的全名，您可以使用“*package-name-pattern*”。</div><div class="line">aptitude</div><div class="line">    #详细查看已安装或可用的软件包。与apt-get类似，aptitude可以通过命令行方式调用，但仅限于某些命令——最常见的有安装和卸载命令。由于aptitude比apt-get了解更多信息，可以说它更适合用来进行安装和卸载。</div><div class="line">apt-cache showpkg pkgs</div><div class="line">    #显示软件包信息。</div><div class="line">apt-cache dumpavail</div><div class="line">    #打印可用软件包列表。</div><div class="line">apt-cache show pkgs</div><div class="line">    #显示软件包记录，类似于dpkg –print-avail。</div><div class="line">apt-cache pkgnames</div><div class="line">    #打印软件包列表中所有软件包的名称。</div><div class="line">dpkg -S file</div><div class="line">    #这个文件属于哪个已安装软件包。</div><div class="line">dpkg -L package</div><div class="line">    #列出软件包中的所有文件。</div><div class="line">apt-file search filename</div><div class="line">    #查找包含特定文件的软件包（不一定是已安装的），这些文件的文件名中含有指定的字符串。apt-file是一个独立的软件包。您必须 先使用apt-get install来安装它，然後运行apt-file update。如果apt-file search filename输出的内容太多，您可以尝试使用apt-file search filename | grep -w filename（只显示指定字符串作为完整的单词出现在其中的那些文件名）或者类似方法，例如：apt-file search filename | grep /bin/（只显示位于诸如/bin或/usr/bin这些文件夹中的文件，如果您要查找的是某个特定的执行文件的话，这样做是有帮助的）。</div><div class="line">apt-get update</div><div class="line">    #系统软件包更新</div></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/03/15/Node-js在Web开发中有哪些优势和劣势/" itemprop="url">
                   Node.js在Web开发中有哪些优势和劣势
                 </a>
@@ -1342,118 +1455,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/03/15/mongodb和redis设计原理简析/" itemprop="url">
-                  mongodb和redis设计原理简析
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-03-15T00:00:00+00:00" content="Mar 15 2015">
-              Mar 15 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mongodb/" itemprop="url" rel="index">
-                    <span itemprop="name">mongodb</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="来源：http-blog-csdn-net-yangbutao-article-details-8309539"><a href="#来源：http-blog-csdn-net-yangbutao-article-details-8309539" class="headerlink" title="来源：http://blog.csdn.net/yangbutao/article/details/8309539"></a>来源：<a href="http://blog.csdn.net/yangbutao/article/details/8309539" target="_blank" rel="external">http://blog.csdn.net/yangbutao/article/details/8309539</a></h2>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1499,7 +1500,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-count">73</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1507,7 +1508,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">57</span>
+                <span class="site-state-item-count">58</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1516,7 +1517,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">98</span>
+                <span class="site-state-item-count">102</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
