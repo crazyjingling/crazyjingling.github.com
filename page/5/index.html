@@ -264,6 +264,127 @@
             
               
                 
+                <a class="post-title-link" href="/2015/03/15/Ubuntu软件安装卸载命令/" itemprop="url">
+                  Ubuntu软件安装卸载命令
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-03-15T14:24:09+00:00" content="Mar 15 2015">
+              Mar 15 2015
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>安装软件</p>
+<pre><code>apt-get install softname1 softname2 softname3……
+</code></pre><p>卸载软件</p>
+<pre><code>apt-get remove softname1 softname2 softname3……
+</code></pre><p>卸载并清除配置</p>
+<pre><code>apt-get remove --purge softname1
+</code></pre><p>更新软件信息数据库<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/03/15/Ubuntu软件安装卸载命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/03/15/apt-get命令/" itemprop="url">
                   apt-get命令
                 </a>
@@ -1330,131 +1451,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/03/15/mongodb简单学习/" itemprop="url">
-                  mongodb简单学习
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-03-15T00:00:00+00:00" content="Mar 15 2015">
-              Mar 15 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/mongodb/" itemprop="url" rel="index">
-                    <span itemprop="name">mongodb</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>MongoDB的内部构造 From 《MongoDB The Definitive Guide》<br>    <a href="http://www.cnblogs.com/gpcuster/archive/2010/10/04/1841877.html">http://www.cnblogs.com/gpcuster/archive/2010/10/04/1841877.html</a><br>MongoDB——通过客户端理解mongoDB体系结构<br>    <a href="http://blog.csdn.net/liusong0605/article/details/10611895">http://blog.csdn.net/liusong0605/article/details/10611895</a><br>MongoDB内存使用原理<br>    <a href="http://www.searchdatabase.com.cn/showcontent_51990.htm">http://www.searchdatabase.com.cn/showcontent_51990.htm</a></p>
-<hr>
-<ol>
-<li><p>日期：mongodb的日期不包含时区。日期对象 new Date()，日期字符串 Date(…)</p>
-</li>
-<li><p>json仅包含6中数据类型：（null,布尔，数字，字符串，数组，对象）<br>局限：</p>
-<pre><code>1)没有日期类型
-2)只有一种数字类型，无法区分浮点数和整数，更别说区分32位和64位数字
-3)不能表示其他通用类型，比如，正则表达式
-</code></pre></li>
-<li><p>BSON：</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/15/mongodb简单学习/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1500,7 +1496,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-count">74</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1508,7 +1504,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">59</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1517,7 +1513,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">102</span>
+                <span class="site-state-item-count">104</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
