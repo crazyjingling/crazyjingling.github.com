@@ -264,6 +264,135 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/03/安装python-virtualenv/" itemprop="url">
+                  安装pythod-virtualenv
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-03T14:36:00+00:00" content="Aug 3 2016">
+              Aug 3 2016
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/python/整理/" itemprop="url" rel="index">
+                    <span itemprop="name">整理</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>Centos6.5环境安装pythod-virtualenv时，yum安装失败：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum install python-virtualenv</div></pre></td></tr></table></figure></p>
+<p>错误提示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ yum install python-virtualenv</div><div class="line">Loaded plugins: fastestmirror, security</div><div class="line">Loading mirror speeds from cached hostfile</div><div class="line"> * base: mirrors.btte.net</div><div class="line"> * extras: mirrors.yun-idc.com</div><div class="line"> * updates: mirrors.btte.net</div><div class="line">Setting up Install Process</div><div class="line">No package python-virtualenv available.</div><div class="line">Error: Nothing to do</div></pre></td></tr></table></figure></p>
+<p>没有找到此问题的具体原因和解决方案，所以只能更换virtualenv的安装方式。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/03/安装python-virtualenv/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/03/node服务器不响应--mysql连接（整理）/" itemprop="url">
                   node服务器不响应--mysql连接（整理）
                 </a>
@@ -1328,138 +1457,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/01/05/webpack学习笔记/" itemprop="url">
-                  webpack学习笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-01-05T13:59:26+00:00" content="Jan 5 2016">
-              Jan 5 2016
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-webpack配置文件解析"><a href="#1-webpack配置文件解析" class="headerlink" title="1. webpack配置文件解析"></a>1. webpack配置文件解析</h2><h3 id="1-1-参数解析"><a href="#1-1-参数解析" class="headerlink" title="1.1 参数解析"></a>1.1 参数解析</h3><h2 id="2-api"><a href="#2-api" class="headerlink" title="2. api"></a>2. api</h2><h3 id="2-1-webpack-options-callback"><a href="#2-1-webpack-options-callback" class="headerlink" title="2.1 webpack(options, callback)"></a>2.1 <code>webpack(options, callback)</code></h3><p>下面是其源码：</p>
-<pre style="height:500px;">
-function webpack(options, callback) {
-    var compiler;
-    if(Array.isArray(options)) {
-        compiler = new MultiCompiler(options.map(function(options) {
-            return webpack(options);
-        }));
-    } else if(typeof options === "object") {
-        new WebpackOptionsDefaulter().process(options);
-
-        compiler = new Compiler();
-        compiler.options = options;
-        compiler.options = new WebpackOptionsApply().process(options, compiler);
-        new NodeEnvironmentPlugin().apply(compiler);
-        compiler.applyPlugins("environment");
-        compiler.applyPlugins("after-environment");
-    } else {
-        throw new Error("Invalid argument: options");
-    }
-    if(callback) {
-        if(typeof callback !== "function") throw new Error("Invalid argument: callback");
-        if(options.watch === true) {
-            var watchOptions = (!Array.isArray(options) ? options : options[0]).watchOptions || {};
-            // TODO remove this in next major version
-            var watchDelay = (!Array.isArray(options) ? options : options[0]).watchDelay;
-            if(watchDelay) {
-                console.warn("options.watchDelay is deprecated: Use 'options.watchOptions.aggregateTimeout' instead");
-                watchOptions.aggregateTimeout = watchDelay;
-            }
-            return compiler.watch(watchOptions, callback);
-        }
-        compiler.run(callback);
-    }
-    return compiler;
-}
-</pre>
-
-
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1505,7 +1502,7 @@ function webpack(options, callback) {
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">74</span>
+              <span class="site-state-item-count">75</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1513,7 +1510,7 @@ function webpack(options, callback) {
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1522,7 +1519,7 @@ function webpack(options, callback) {
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">104</span>
+                <span class="site-state-item-count">106</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

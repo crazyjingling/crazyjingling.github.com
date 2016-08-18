@@ -264,6 +264,138 @@
             
               
                 
+                <a class="post-title-link" href="/2016/01/05/webpack学习笔记/" itemprop="url">
+                  webpack学习笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-01-05T13:59:26+00:00" content="Jan 5 2016">
+              Jan 5 2016
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="1-webpack配置文件解析"><a href="#1-webpack配置文件解析" class="headerlink" title="1. webpack配置文件解析"></a>1. webpack配置文件解析</h2><h3 id="1-1-参数解析"><a href="#1-1-参数解析" class="headerlink" title="1.1 参数解析"></a>1.1 参数解析</h3><h2 id="2-api"><a href="#2-api" class="headerlink" title="2. api"></a>2. api</h2><h3 id="2-1-webpack-options-callback"><a href="#2-1-webpack-options-callback" class="headerlink" title="2.1 webpack(options, callback)"></a>2.1 <code>webpack(options, callback)</code></h3><p>下面是其源码：</p>
+<pre style="height:500px;">
+function webpack(options, callback) {
+    var compiler;
+    if(Array.isArray(options)) {
+        compiler = new MultiCompiler(options.map(function(options) {
+            return webpack(options);
+        }));
+    } else if(typeof options === "object") {
+        new WebpackOptionsDefaulter().process(options);
+
+        compiler = new Compiler();
+        compiler.options = options;
+        compiler.options = new WebpackOptionsApply().process(options, compiler);
+        new NodeEnvironmentPlugin().apply(compiler);
+        compiler.applyPlugins("environment");
+        compiler.applyPlugins("after-environment");
+    } else {
+        throw new Error("Invalid argument: options");
+    }
+    if(callback) {
+        if(typeof callback !== "function") throw new Error("Invalid argument: callback");
+        if(options.watch === true) {
+            var watchOptions = (!Array.isArray(options) ? options : options[0]).watchOptions || {};
+            // TODO remove this in next major version
+            var watchDelay = (!Array.isArray(options) ? options : options[0]).watchDelay;
+            if(watchDelay) {
+                console.warn("options.watchDelay is deprecated: Use 'options.watchOptions.aggregateTimeout' instead");
+                watchOptions.aggregateTimeout = watchDelay;
+            }
+            return compiler.watch(watchOptions, callback);
+        }
+        compiler.run(callback);
+    }
+    return compiler;
+}
+</pre>
+
+
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/10/26/原色/" itemprop="url">
                   RGB与CMY
                 </a>
@@ -1230,133 +1362,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/12/开放内容协议/" itemprop="url">
-                  开放内容协议
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-10-12T16:03:00+00:00" content="Oct 12 2015">
-              Oct 12 2015
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/协议/" itemprop="url" rel="index">
-                    <span itemprop="name">协议</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Open Graph通讯协定(Protocol)本身是一种制定一套Metatags的规格，用来标注你的页面，告诉我们你的网页代表哪一类型的现实世界物件。</p>
-<pre><code>主要标签属性：
-  og:title 标题
-  og:type 类型
-  常用值:article book movie
-  og:image 略缩图地址
-  og:url 页面地址
-  og:description 页面的简单描述
-  og:site_name 页面所在网站名
-  og:videosrc 视频或者Flash地址
-  og:audiosrc 音频地址
-</code></pre><p>详见  <a href="http://ogp.me/">http://ogp.me/</a></p>
-<h4 id="常用社交网站对og的支持情况："><a href="#常用社交网站对og的支持情况：" class="headerlink" title="常用社交网站对og的支持情况："></a>常用社交网站对og的支持情况：
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/10/12/开放内容协议/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1402,7 +1407,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">74</span>
+              <span class="site-state-item-count">75</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1410,7 +1415,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-count">60</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1419,7 +1424,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">104</span>
+                <span class="site-state-item-count">106</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
